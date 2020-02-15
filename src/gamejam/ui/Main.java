@@ -1,9 +1,14 @@
 package gamejam.ui;
 
+import gamejam.model.objects.Player;
+import gamejam.model.utils.Arrow;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -61,7 +66,35 @@ public class Main extends Application {
 
     private void setupScene() {
         scene = new Scene(canvasLayout);
-        scene.setOnKeyPressed(game);
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                KeyCode keyCode = event.getCode();
+                Player player = game.getPlayer();
+
+                switch (keyCode) {
+                    case LEFT:
+                        player.move(Arrow.LEFT);
+                        System.out.println("LEFT");
+                        break;
+                    case RIGHT:
+                        player.move(Arrow.RIGHT);
+                        System.out.println("RIGHT");
+                        break;
+                    case UP:
+                        player.jump(Arrow.UP);
+                        System.out.println("UP");
+                        break;
+                    case SPACE:
+                        player.jump(Arrow.SPACE);
+                        System.out.println("SPACE");
+                        break;
+                    default:
+                        break;
+                }
+            }
+            });
+
         window.setScene(scene);
     }
 }

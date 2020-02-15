@@ -1,21 +1,17 @@
 package gamejam.ui;
 
-import gamejam.model.utils.Arrow;
-import gamejam.model.utils.Background;
 import gamejam.model.interfaces.Drawer;
 import gamejam.model.interfaces.Updatable;
 import gamejam.model.managers.PlatformManager;
 import gamejam.model.objects.Player;
+import gamejam.model.utils.Background;
 import javafx.animation.AnimationTimer;
-import javafx.event.EventHandler;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-public class Game implements Drawer, Updatable, EventHandler<KeyEvent> {
+public class Game implements Drawer, Updatable {
 
     private static final String BACKGROUND_PATH =
             System.getProperty("user.dir") +
@@ -37,6 +33,10 @@ public class Game implements Drawer, Updatable, EventHandler<KeyEvent> {
         this.player = new Player();
         this.platformManager = new PlatformManager();
         this.gc = gc;
+    }
+
+    Player getPlayer() {
+        return player;
     }
 
     @Override
@@ -71,31 +71,5 @@ public class Game implements Drawer, Updatable, EventHandler<KeyEvent> {
                 }
             }
         }.start();
-    }
-
-    @Override
-    public void handle(KeyEvent event) {
-        KeyCode keyCode = event.getCode();
-
-        switch (keyCode) {
-            case LEFT:
-                player.move(Arrow.LEFT);
-                System.out.println("LEFT");
-                break;
-            case RIGHT:
-                player.move(Arrow.RIGHT);
-                System.out.println("RIGHT");
-                break;
-            case UP:
-                player.jump(Arrow.UP);
-                System.out.println("UP");
-                break;
-            case SPACE:
-                player.jump(Arrow.SPACE);
-                System.out.println("SPACE");
-                break;
-            default:
-                break;
-        }
     }
 }
