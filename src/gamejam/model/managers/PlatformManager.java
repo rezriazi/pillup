@@ -53,6 +53,8 @@ public class PlatformManager  implements Updatable, Drawable {
             currentPlatform.update();
             if (currentPlatform.getY() > Main.HEIGHT) {
                 currentPlatform.setY(- random.nextInt(Main.HEIGHT));
+                currentPlatform.setX(random.nextInt(Main.WIDTH));
+                currentPlatform.changeObstacleType();
             }
         }
     }
