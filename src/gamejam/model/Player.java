@@ -1,12 +1,18 @@
 package gamejam.model;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.shape.Circle;
 
 public class Player extends Object {
 
+    private static final long JUMP_ANIMATION = 200;
+
+
+    private Action action;
 
     public Player(){
         super(100,100,20,30, 2,2);
+        action = new Action(JUMP_ANIMATION);
     }
 
 
@@ -19,11 +25,19 @@ public class Player extends Object {
 
     @Override
     public <T> void move(T... obj) {
-
+        this.moveX();
     }
 
     @Override
     public <T> void jump(T... obj) {
+        action.start();
+    }
 
+    @Override
+    public <T> void update(T... obj) {
+        action.update(obj);
+        if(action.isInAction()){
+            this.moveY(-Object.GRAVITY);
+        }
     }
 }

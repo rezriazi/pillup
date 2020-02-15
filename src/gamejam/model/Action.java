@@ -10,7 +10,6 @@ public class Action implements Updatable{
     private long time;
     private long startTime;
     private boolean isInAction;
-    private Image currentImage;
     private int index;
 
     public Action(long t,String ... place){
@@ -25,12 +24,11 @@ public class Action implements Updatable{
             Image i = new Image(s);
             this.images.add(i);
         }
-        this.currentImage = this.images.get(0);
     }
 
     public void start() {
         this.startTime = System.currentTimeMillis();
-        this.isInAction = false;
+        this.isInAction = true;
     }
 
     public void check(){
@@ -39,11 +37,19 @@ public class Action implements Updatable{
         }
     }
 
+    public Image getCurrentImage(){
+        return this.images.get(index);
+    }
+
+    public boolean isInAction(){
+        return this.isInAction;
+    }
+
     @Override
     public <T> void update(T... obj) {
         if(isInAction){
             index++;
-
+            this.check();
         }
     }
 
