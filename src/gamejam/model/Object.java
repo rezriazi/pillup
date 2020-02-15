@@ -22,10 +22,4 @@ public abstract class Object implements Movable{
         this.xVel = xVel;
         this.yVel = yVel;
     }
-
-    public boolean
-
-
-
-
 }
