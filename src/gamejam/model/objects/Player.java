@@ -5,14 +5,15 @@ import javafx.scene.canvas.GraphicsContext;
 
 public class Player extends Object {
 
-    private static final long JUMP_ANIMATION = 200;
+    private static final long JUMP_ANIMATION = 400;
 
 
     private Action action;
 
     public Player(){
-        super(100,100,20,30, 2,2);
+        super(100,100,20,30, 2,-2);
         action = new Action(JUMP_ANIMATION);
+        action.start();
     }
 
 
@@ -37,7 +38,9 @@ public class Player extends Object {
     public <T> void update(T... obj) {
         action.update(obj);
         if(action.isInAction()){
-            this.moveY(-Object.GRAVITY);
+            this.moveY();
+        }else{
+            this.moveY(Object.GRAVITY);
         }
     }
 }
