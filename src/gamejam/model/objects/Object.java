@@ -7,6 +7,9 @@ import gamejam.model.interfaces.Updatable;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 
 public abstract class Object implements Movable, Drawable, Updatable {
 
@@ -143,7 +146,11 @@ public abstract class Object implements Movable, Drawable, Updatable {
         this.r = r;
     }
 
-    public void setImage(String i){
-        this.image = new Image(i);
+    public void setImage(String i) throws FileNotFoundException {
+        this.image = new Image(new FileInputStream(i));
+    }
+
+    public Image getImage() {
+        return this.image;
     }
 }

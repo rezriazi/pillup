@@ -4,9 +4,16 @@ import gamejam.model.utils.Animation;
 import gamejam.model.utils.Arrow;
 import gamejam.ui.Main;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 public class Player extends Object {
+    private static final String LITTLE_BOY_PATH =
+            System.getProperty("user.dir") +
+                    "/src/gamejam/assets/littleboy.png";
 
     private static final long JUMP_ANIMATION = 250;
     private static final long X_ANIMATION = 200;
@@ -16,9 +23,14 @@ public class Player extends Object {
     private Animation actionX;
 
     public Player(){
-        super(100,300,20,30, 5,-5);
+        super(100,300,200,150, 5,-5);
         action = new Animation(JUMP_ANIMATION);
         actionX = new Animation(X_ANIMATION);
+        try {
+            this.setImage(LITTLE_BOY_PATH);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 //        action.start();
     }
 
@@ -26,9 +38,9 @@ public class Player extends Object {
     @Override
     public <T> void draw(T... obj) {
         GraphicsContext gc = (GraphicsContext) obj[0];
-        gc.setFill(Color.RED);
-        gc.fillRect(getX(),getY(),getW(),getH());
-
+//        gc.setFill(Color.RED);
+//        gc.fillRect(getX(),getY(),getW(),getH());
+        gc.drawImage(this.getImage(),this.getX(),this.getY(),this.getW(),this.getH());
     }
 
     @Override
