@@ -10,7 +10,7 @@ import javafx.scene.shape.Rectangle;
 
 public abstract class Object implements Movable, Drawable, Updatable {
 
-    public static final double GRAVITY = 0.98;
+    public static final double GRAVITY = 2.16969;
 
     private double x;
     private double y;

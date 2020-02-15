@@ -25,7 +25,7 @@ public class Game implements Drawer, Updatable {
     private boolean running = false;
 
     // TODO: could be final, we should find the correct number
-    private long dt = 10;
+    private long dt = 12;
 
     public Game(GraphicsContext gc) throws FileNotFoundException {
         this.background =

@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
-public class Action implements Updatable {
+public class Animation implements Updatable {
 
     private ArrayList<Image> images;
     private double time;
@@ -13,7 +13,7 @@ public class Action implements Updatable {
     private boolean isInAction;
     private int index;
 
-    public Action(double t,String ... place){
+    public Animation(double t, String ... place){
         initImages(place);
         this.time = t;
         this.isInAction = false;
