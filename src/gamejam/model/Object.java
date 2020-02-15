@@ -1,8 +1,11 @@
 package gamejam.model;
 
-import java.awt.*;
 
-public abstract class Object implements Movable{
+import javafx.scene.image.Image;
+import javafx.scene.shape.Rectangle;
+
+
+public abstract class Object implements Movable, Drawable{
 
     private static final double GRAVITY = 0.98;
 
@@ -13,6 +16,7 @@ public abstract class Object implements Movable{
     private double xVel;
     private double yVel;
     private Rectangle r;
+    private Image image;
 
     public Object() {
         this.x = 0;
@@ -22,6 +26,7 @@ public abstract class Object implements Movable{
         this.h = 1;
         this.w = 1;
         this.initRect();
+        this.image = null;
     }
 
     public Object(double x,double y,double w,double h,double xVel,double yVel){
@@ -54,7 +59,7 @@ public abstract class Object implements Movable{
      * @return
      */
     public boolean hits(Object o) {
-        return this.r.intersects(o.r);
+        return this.r.intersects(o.getX(),o.getY(),o.getW(),o.getH());
     }
 
     protected void move() {
@@ -117,5 +122,9 @@ public abstract class Object implements Movable{
 
     public void setR(Rectangle r) {
         this.r = r;
+    }
+
+    public void setImage(String i){
+        this.image = new Image(i);
     }
 }
