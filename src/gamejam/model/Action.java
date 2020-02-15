@@ -8,12 +8,12 @@ import java.util.ArrayList;
 public class Action implements Updatable {
 
     private ArrayList<Image> images;
-    private long time;
+    private double time;
     private long startTime;
     private boolean isInAction;
     private int index;
 
-    public Action(long t,String ... place){
+    public Action(double t,String ... place){
         initImages(place);
         this.time = t;
         this.isInAction = false;
@@ -33,7 +33,7 @@ public class Action implements Updatable {
     }
 
     public void check(){
-        if(this.startTime + time >= System.currentTimeMillis()){
+        if( System.currentTimeMillis() - startTime >= time){
            this.isInAction = false;
         }
     }

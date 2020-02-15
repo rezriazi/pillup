@@ -75,10 +75,15 @@ public abstract class Object implements Movable, Drawable, Updatable {
     }
 
     protected void moveY(double ... vals) {
-        this.y += this.yVel;
-        for(double v:vals){
-            this.y+=v;
+
+        if(vals.length != 0){
+            for(double v:vals){
+                this.y+=v;
+            }
+        }else{
+            this.y += this.yVel;
         }
+
     }
 
 
