@@ -1,4 +1,4 @@
-package gamejam.model;
+package gamejam.model.utils;
 
 public enum Arrow {
     LEFT(-1),

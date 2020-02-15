@@ -1,4 +1,4 @@
-package gamejam.model;
+package gamejam.model.utils;
 
 import gamejam.model.interfaces.Drawable;
 import javafx.scene.canvas.GraphicsContext;

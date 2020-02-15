@@ -1,7 +1,7 @@
 package gamejam.ui;
 
-import gamejam.model.Arrow;
-import gamejam.model.Background;
+import gamejam.model.utils.Arrow;
+import gamejam.model.utils.Background;
 import gamejam.model.interfaces.Drawer;
 import gamejam.model.interfaces.Updatable;
 import gamejam.model.managers.PlatformManager;

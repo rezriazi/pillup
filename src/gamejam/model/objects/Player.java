@@ -1,7 +1,7 @@
 package gamejam.model.objects;
 
-import gamejam.model.Action;
-import gamejam.model.Arrow;
+import gamejam.model.utils.Action;
+import gamejam.model.utils.Arrow;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 

@@ -1,4 +1,4 @@
-package gamejam.model;
+package gamejam.model.utils;
 
 import gamejam.model.interfaces.Updatable;
 import javafx.scene.image.Image;
