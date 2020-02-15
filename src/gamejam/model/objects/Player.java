@@ -2,6 +2,7 @@ package gamejam.model.objects;
 
 import gamejam.model.Action;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public class Player extends Object {
 
@@ -20,6 +21,7 @@ public class Player extends Object {
     @Override
     public <T> void draw(T... obj) {
         GraphicsContext gc = (GraphicsContext) obj[0];
+        gc.setFill(Color.RED);
         gc.fillRect(getX(),getY(),getW(),getH());
 
     }

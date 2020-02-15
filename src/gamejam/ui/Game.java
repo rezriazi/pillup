@@ -7,33 +7,29 @@ import gamejam.model.managers.PlatformManager;
 import gamejam.model.objects.Player;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class Game implements Drawer, Updatable {
 
-    private static final String BACKGROUND_PATH = "";
+    private static final String BACKGROUND_PATH =
+            System.getProperty("user.dir") +
+                    "/src/gamejam/assets/background.png";
 
     private final Player player;
     private final Background background;
     private final PlatformManager platformManager;
     private final GraphicsContext gc;
 
-    private final int canvasWidth;
-    private final int canvasHeight;
-
     private boolean running = false;
 
     // TODO: could be final, we should find the correct number
     private long dt = 10;
 
-    public Game(GraphicsContext gc, int canvasWidth, int canvasHeight) {
-        this.canvasWidth = canvasWidth;
-        this.canvasHeight = canvasHeight;
-
-        Image img = new Image(BACKGROUND_PATH);
-        this.background = new Background(img, img.getWidth(), img.getHeight(), canvasWidth, canvasHeight);
-
+    public Game(GraphicsContext gc) throws FileNotFoundException {
+        this.background =
+                new Background(new FileInputStream(BACKGROUND_PATH));
         this.player = new Player();
         this.platformManager = new PlatformManager();
         this.gc = gc;
@@ -63,8 +59,7 @@ public class Game implements Drawer, Updatable {
                 if (running) {
                     if ((now - lastUpdate) >= dt) {
                         // TODO: getting input
-                        // TODO: set CANVAS_WIDTH & CANVAS_HEIGHT to public
-                        // TODO: gc.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+                        gc.clearRect(0, 0, Main.CANVAS_WIDTH, Main.CANVAS_HEIGHT);
                         update();
                         draw();
 

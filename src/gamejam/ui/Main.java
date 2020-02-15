@@ -32,7 +32,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         window = primaryStage;
         setup();
-        new Game(gc, CANVAS_WIDTH, CANVAS_HEIGHT).start();
+        new Game(gc).start();
     }
 
     private void setup() {
