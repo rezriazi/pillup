@@ -1,17 +1,21 @@
 package gamejam.ui;
 
+import gamejam.model.Arrow;
 import gamejam.model.Background;
 import gamejam.model.interfaces.Drawer;
 import gamejam.model.interfaces.Updatable;
 import gamejam.model.managers.PlatformManager;
 import gamejam.model.objects.Player;
 import javafx.animation.AnimationTimer;
+import javafx.event.EventHandler;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-public class Game implements Drawer, Updatable {
+public class Game implements Drawer, Updatable, EventHandler<KeyEvent> {
 
     private static final String BACKGROUND_PATH =
             System.getProperty("user.dir") +
@@ -39,14 +43,14 @@ public class Game implements Drawer, Updatable {
     public void draw() {
         background.draw(gc);
         player.draw(gc);
-        platformManager.draw(gc);
+//        platformManager.draw(gc);
     }
 
     @Override
     public <T> void update(T... obj) {
         background.draw(gc);
         player.update();
-        platformManager.update();
+//        platformManager.update();
     }
 
     public void start() {
@@ -58,7 +62,6 @@ public class Game implements Drawer, Updatable {
             public void handle(long now) {
                 if (running) {
                     if ((now - lastUpdate) >= dt) {
-                        // TODO: getting input
                         gc.clearRect(0, 0, Main.CANVAS_WIDTH, Main.CANVAS_HEIGHT);
                         update();
                         draw();
@@ -68,5 +71,31 @@ public class Game implements Drawer, Updatable {
                 }
             }
         }.start();
+    }
+
+    @Override
+    public void handle(KeyEvent event) {
+        KeyCode keyCode = event.getCode();
+
+        switch (keyCode) {
+            case LEFT:
+                player.move(Arrow.LEFT);
+                System.out.println("LEFT");
+                break;
+            case RIGHT:
+                player.move(Arrow.RIGHT);
+                System.out.println("RIGHT");
+                break;
+            case UP:
+                player.jump(Arrow.UP);
+                System.out.println("UP");
+                break;
+            case SPACE:
+                player.jump(Arrow.SPACE);
+                System.out.println("SPACE");
+                break;
+            default:
+                break;
+        }
     }
 }

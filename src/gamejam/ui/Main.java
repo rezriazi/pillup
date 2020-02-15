@@ -20,9 +20,11 @@ public class Main extends Application {
 
     private Stage window;
     private Scene scene;
-    private Canvas canvas;
+    private Canvas canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
     private Pane canvasLayout;
-    private GraphicsContext gc;
+    private GraphicsContext gc = canvas.getGraphicsContext2D();
+
+    private Game game;
 
     public static void main(String[] args) {
         launch(args);
@@ -31,8 +33,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         window = primaryStage;
+        game = new Game(gc);
         setup();
-        new Game(gc).start();
+        game.start();
     }
 
     private void setup() {
@@ -52,15 +55,13 @@ public class Main extends Application {
     }
 
     private void setupCanvas() {
-        canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
-
         canvasLayout = new Pane();
         canvasLayout.getChildren().add(canvas);
-        gc = canvas.getGraphicsContext2D();
     }
 
     private void setupScene() {
         scene = new Scene(canvasLayout);
+        scene.setOnKeyPressed(game);
         window.setScene(scene);
     }
 }
