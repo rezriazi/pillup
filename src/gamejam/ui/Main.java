@@ -9,14 +9,14 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    public static final int WIDTH = 540;
-    public static final int HEIGHT = 600;
+    static final int WIDTH = 540;
+    static final int HEIGHT = 600;
 
-    private static final int SCENE_WIDTH = 530;
-    private static final int SCENE_HEIGHT = 590;
+    static final int SCENE_WIDTH = 530;
+    static final int SCENE_HEIGHT = 590;
 
-    private static final int CANVAS_WIDTH = SCENE_WIDTH;
-    private static final int CANVAS_HEIGHT = SCENE_HEIGHT;
+    static final int CANVAS_WIDTH = SCENE_WIDTH;
+    static final int CANVAS_HEIGHT = SCENE_HEIGHT;
 
     private Stage window;
     private Scene scene;
@@ -32,7 +32,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         window = primaryStage;
         setup();
-        new Game(gc).start();
+        new Game(gc, CANVAS_WIDTH, CANVAS_HEIGHT).start();
     }
 
     private void setup() {
@@ -52,7 +52,7 @@ public class Main extends Application {
     }
 
     private void setupCanvas() {
-        canvas = new Canvas(WIDTH, HEIGHT);
+        canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 
         canvasLayout = new Pane();
         canvasLayout.getChildren().add(canvas);
