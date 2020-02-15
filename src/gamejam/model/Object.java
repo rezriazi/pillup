@@ -5,9 +5,9 @@ import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 
 
-public abstract class Object implements Movable, Drawable{
+public abstract class Object implements Movable, Drawable,Updatable{
 
-    private static final double GRAVITY = 0.98;
+    public static final double GRAVITY = 0.98;
 
     private double x;
     private double y;
@@ -65,6 +65,17 @@ public abstract class Object implements Movable, Drawable{
     protected void move() {
         this.x += this.xVel;
         this.y += this.yVel;
+    }
+
+    protected void moveX() {
+        this.x += this.xVel;
+    }
+
+    protected void moveY(double ... vals) {
+        this.y += this.yVel;
+        for(double v:vals){
+            this.y+=v;
+        }
     }
 
 
