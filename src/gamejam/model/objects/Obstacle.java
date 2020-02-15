@@ -1,4 +1,4 @@
-package gamejam.model;
+package gamejam.model.objects;
 
 public class Obstacle extends Object {
     // x, y is for platform

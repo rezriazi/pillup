@@ -1,10 +1,11 @@
 package gamejam.model;
 
+import gamejam.model.interfaces.Updatable;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
-public class Action implements Updatable{
+public class Action implements Updatable {
 
     private ArrayList<Image> images;
     private long time;

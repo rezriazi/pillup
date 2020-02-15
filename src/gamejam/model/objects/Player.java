@@ -1,7 +1,7 @@
-package gamejam.model;
+package gamejam.model.objects;
 
+import gamejam.model.Action;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.shape.Circle;
 
 public class Player extends Object {
 

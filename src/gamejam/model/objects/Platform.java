@@ -1,8 +1,11 @@
-package gamejam.model;
+package gamejam.model.objects;
+
+import gamejam.model.interfaces.Drawable;
+import gamejam.model.interfaces.Updatable;
 
 public class Platform extends Object implements Updatable, Drawable {
 
-    Platform(double x, double y, double w, double h, double yVel) {
+    public Platform(double x, double y, double w, double h, double yVel) {
         super(x, y, w, h, 0, yVel);
     }
 

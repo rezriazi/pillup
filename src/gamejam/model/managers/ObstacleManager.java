@@ -1,4 +1,8 @@
-package gamejam.model;
+package gamejam.model.managers;
+
+import gamejam.model.interfaces.Drawable;
+import gamejam.model.interfaces.Updatable;
+import gamejam.model.objects.Obstacle;
 
 import java.util.ArrayList;
 

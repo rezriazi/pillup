@@ -1,6 +1,10 @@
 package gamejam.ui;
 
-import gamejam.model.*;
+import gamejam.model.interfaces.Drawer;
+import gamejam.model.interfaces.Updatable;
+import gamejam.model.managers.ObstacleManager;
+import gamejam.model.managers.PlatformManager;
+import gamejam.model.objects.Player;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
 

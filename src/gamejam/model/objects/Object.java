@@ -1,11 +1,14 @@
-package gamejam.model;
+package gamejam.model.objects;
 
 
+import gamejam.model.interfaces.Drawable;
+import gamejam.model.interfaces.Movable;
+import gamejam.model.interfaces.Updatable;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 
 
-public abstract class Object implements Movable, Drawable,Updatable{
+public abstract class Object implements Movable, Drawable, Updatable {
 
     public static final double GRAVITY = 0.98;
 

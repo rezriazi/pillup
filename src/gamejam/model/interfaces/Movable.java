@@ -1,4 +1,4 @@
-package gamejam.model;
+package gamejam.model.interfaces;
 
 public interface Movable {
     <T> void move(T ... obj);

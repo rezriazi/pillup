@@ -1,5 +1,8 @@
-package gamejam.model;
+package gamejam.model.managers;
 
+import gamejam.model.interfaces.Drawable;
+import gamejam.model.interfaces.Updatable;
+import gamejam.model.objects.Platform;
 import gamejam.ui.Main;
 
 import java.util.ArrayList;
@@ -10,7 +13,7 @@ import java.util.Random;
  * series of platforms
  * if goes out of the screen, gets deleted and a new platform is added with random position
  * */
-public class PlatformManager  implements Updatable, Drawable{
+public class PlatformManager  implements Updatable, Drawable {
     private Random random = new Random();
     private static final int PLATFORM_COUNT = 7;
     private static final int PLATFORM_HEIGHT = 20;
