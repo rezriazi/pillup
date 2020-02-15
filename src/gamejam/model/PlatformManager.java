@@ -10,7 +10,7 @@ import java.util.Random;
  * series of platforms
  * if goes out of the screen, gets deleted and a new platform is added with random position
  * */
-public class PlatformManager {
+public class PlatformManager  implements Updatable{
     private Random random = new Random();
     private static final int PLATFORM_COUNT = 7;
     private static final int PLATFORM_HEIGHT = 20;
@@ -22,12 +22,13 @@ public class PlatformManager {
     // constructor
     public PlatformManager() {
         platformList = new ArrayList<>();
+        fillPlatformList();
     }
 
     /**
      * Initializes the platforms with random positions and adds them to the list
      * */
-    public void fillPlatformList() {
+    private void fillPlatformList() {
         for (int i = 0; i < PLATFORM_COUNT; i++) {
             platformList.add(
                     new Platform(random.nextInt(Main.WIDTH),
@@ -42,8 +43,8 @@ public class PlatformManager {
      * add new platform with random position
      * */
 
-    //TODO
-    public void updatePlatforms() {
+    @Override
+    public <T> void update(T... obj) {
         for (int i  = 0; i < PLATFORM_COUNT; i++) {
             Platform currentPlatform = platformList.get(i);
             currentPlatform.update();
@@ -52,5 +53,4 @@ public class PlatformManager {
             }
         }
     }
-
 }
