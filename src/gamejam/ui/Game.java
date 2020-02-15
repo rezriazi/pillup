@@ -1,11 +1,10 @@
 package gamejam.ui;
 
-import gamejam.model.Drawer;
-import gamejam.model.PlatformManager;
-import gamejam.model.Player;
-import gamejam.model.Updatable;
+import gamejam.model.*;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
+
+
 
 public class Game implements Drawer, Updatable {
 
@@ -35,7 +34,7 @@ public class Game implements Drawer, Updatable {
     public <T> void update(T... obj) {
         player.update();
         platformManager.update();
-        obstcaleManager.update();
+        obstacleManager.update();
     }
 
     public void start() {

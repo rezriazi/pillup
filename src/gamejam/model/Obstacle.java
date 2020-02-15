@@ -20,4 +20,9 @@ public class Obstacle extends Object {
     public <T> void draw(T... obj) {
 
     }
+
+    @Override
+    public <T> void update(T... obj) {
+
+    }
 }
