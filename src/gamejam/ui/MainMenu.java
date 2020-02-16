@@ -7,6 +7,9 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -27,7 +30,7 @@ public class MainMenu implements Drawable {
 
     private static final double SETTINGS_BUTTON_X = PLAY_BUTTON_X;
     private static final double SETTINGS_BUTTON_RADIUS = 50;
-    private static final double SETTINGS_BUTTON_Y = PLAY_BUTTON_Y + PLAY_BUTTON_RADIUS + 10 + SETTINGS_BUTTON_RADIUS;
+    private static final double SETTINGS_BUTTON_Y = PLAY_BUTTON_Y + PLAY_BUTTON_RADIUS + 10;
 
 
     private Background background;
@@ -54,26 +57,24 @@ public class MainMenu implements Drawable {
         GraphicsContext gc = (GraphicsContext) obj[0];
 
         drawBackground(gc);
-        try {
-            drawPlayButton(gc);
-            drawSettingsButton(gc);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+
+        drawSettingsButton(gc);drawPlayButton(gc);
     }
 
     private <T> void drawBackground(T ... obj) {
         background.draw(obj);
     }
 
-    private <T> void drawPlayButton(T ... obj) throws FileNotFoundException {
+    private <T> void drawPlayButton(T ... obj){
         GraphicsContext gc = (GraphicsContext) obj[0];
-        gc.drawImage(playButtonImage, PLAY_BUTTON_X, PLAY_BUTTON_Y);
+        gc.setFill(Color.RED);
+        gc.fillOval(PLAY_BUTTON_X,PLAY_BUTTON_Y,PLAY_BUTTON_RADIUS,PLAY_BUTTON_RADIUS);
+        //gc.drawImage(playButtonImage, PLAY_BUTTON_X, PLAY_BUTTON_Y);
     }
 
-    private <T> void drawSettingsButton(T ... obj) throws FileNotFoundException {
+    private <T> void drawSettingsButton(T ... obj){
         GraphicsContext gc = (GraphicsContext) obj[0];
-        gc.drawImage(settingsButtonImage, SETTINGS_BUTTON_X, SETTINGS_BUTTON_Y);
+        //gc.drawImage(settingsButtonImage, SETTINGS_BUTTON_X, SETTINGS_BUTTON_Y);
     }
 
     public void setupCanvas() {
@@ -82,10 +83,10 @@ public class MainMenu implements Drawable {
             public void handle(MouseEvent event) {
                 double mouseX = event.getSceneX();
                 double mouseY = event.getSceneY();
-
+                System.out.println("play clicked");
                 if (isOnPlayButton(mouseX, mouseY)) {
                     // TODO: Play button is clicked
-                    System.out.println("play clicked");
+
                     playRunnable.run();
                 } else if (isOnSettingsButton(mouseX, mouseY)) {
                     // TODO: Settings button is clicked
