@@ -5,11 +5,14 @@ import gamejam.model.interfaces.Updatable;
 import javafx.scene.canvas.GraphicsContext;
 
 public class Platform extends Object implements Updatable, Drawable {
+    enum types {
+        FLAME_SHIELD,
+        FLAME,
+        FLOAT,
+    }
 
-    private Obstacle obstacle;
     public Platform(double x, double y, double w, double h, double yVel) {
         super(x, y, w, h, 0, yVel);
-        this.obstacle = new Obstacle((int)x, (int)y,20,20);
     }
 
     @Override
@@ -31,11 +34,6 @@ public class Platform extends Object implements Updatable, Drawable {
     @Override
     public <T> void update(T... obj) {
         move(obj);
-        this.obstacle.move(this);
-    }
-
-    public void changeObstacleType() {
-        this.obstacle.changeType();
     }
 
 }

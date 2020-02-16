@@ -5,8 +5,8 @@ import javafx.scene.paint.Color;
 
 import java.util.Random;
 
-public class Obstacle extends Object {
-    static enum types {
+public class Item extends Object {
+    enum types {
         FLAME_SHIELD,
         FLAME,
         FLOAT,
@@ -15,8 +15,8 @@ public class Obstacle extends Object {
     types t;
     // x, y is for platform
     // width, height is for obstacle
-    public Obstacle(int xPlat, int yPlat, int width, int height) {
-        super(xPlat + width, yPlat - height, width , height);
+    public Item(int xPlat, int yPlat, int width, int height) {
+        super();
         changeType();
     }
     @Override
