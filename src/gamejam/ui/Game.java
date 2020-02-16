@@ -78,6 +78,10 @@ public class Game implements Drawer, Updatable {
         return player;
     }
 
+    State getState() {
+        return this.state;
+    }
+
     @Override
     public void draw() {
         //gc.setFill(Color.WHITE);
