@@ -21,7 +21,6 @@ public class GameOverScene {
         root = new BorderPane();
         scene = new Scene(root);
         HBox gameOverBox = new HBox();
-        root.getChildren().add(gameOverBox);
         TextField field = new TextField();
         HBox.setHgrow(field, Priority.ALWAYS);
         gameOverBox.getChildren().addAll(new Label("Game Over"), field);
