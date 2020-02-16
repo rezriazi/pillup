@@ -149,7 +149,7 @@ public class Player extends Object {
 
         this.updateCharacter();
         this.inBound();
-        score.update(obj);
+        score.update();
 
     }
 

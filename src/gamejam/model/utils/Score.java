@@ -6,7 +6,7 @@ import javafx.scene.canvas.GraphicsContext;
 
 public class Score implements Drawable, Updatable {
 
-    private static final int TIME_CONSTANT = 100;
+    private static final int TIME_CONSTANT = 1;
 
     private int score;
 
@@ -14,8 +14,8 @@ public class Score implements Drawable, Updatable {
         this.score = 0;
     }
 
-    private void setScore(long time){
-        this.score = this.score + ((int)(time / TIME_CONSTANT));
+    private void setScore(){
+        this.score = this.score + TIME_CONSTANT;
     }
     @Override
     public <T> void draw(T... obj) {
@@ -26,7 +26,6 @@ public class Score implements Drawable, Updatable {
 
     @Override
     public <T> void update(T... obj) {
-        Integer time = (Integer) obj[0];
-        setScore(time);
+        setScore();
     }
 }
