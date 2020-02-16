@@ -15,13 +15,15 @@ import java.util.Random;
  * */
 public class PlatformManager  implements Updatable, Drawable {
     private Random random = new Random();
-    private static final int PLATFORM_COUNT = 7;
-    private static final int PLATFORM_HEIGHT = 20;
+    private static final int PLATFORM_COUNT = 10;
+    private static final int PLATFORM_HEIGHT = 15;
     private static final int MIN_PLATFORM_WIDTH = 30;
     private static final int PLATFORM_WIDTH_INTERVAL = 50;
-    private static final int PLATFORM_VELOCITY = 30;
+    private static final int PLATFORM_VELOCITY = 5;
+    private static final int HEIGHT_OFFSET = -20;
 
     private ArrayList<Platform> platformList;
+
     // constructor
     public PlatformManager() {
         platformList = new ArrayList<>();
@@ -33,13 +35,21 @@ public class PlatformManager  implements Updatable, Drawable {
      * */
     private void fillPlatformList() {
         for (int i = 0; i < PLATFORM_COUNT; i++) {
-            platformList.add(
-                    new Platform(random.nextInt(Main.WIDTH),
-                                random.nextInt(Main.HEIGHT),
-                            random.nextInt(PLATFORM_WIDTH_INTERVAL) + MIN_PLATFORM_WIDTH,
-                                PLATFORM_HEIGHT,
-                                PLATFORM_VELOCITY));
+            platformList.add(makePlatform(i));
+
         }
+    }
+
+    /**
+     * Generates a new platform
+     * */
+    private Platform makePlatform(int index) {
+        int width = random.nextInt(PLATFORM_WIDTH_INTERVAL) + MIN_PLATFORM_WIDTH;
+         return new Platform(random.nextInt(Main.WIDTH - width) ,
+                 -(Main.HEIGHT/PLATFORM_COUNT) * index,
+                width,
+                PLATFORM_HEIGHT,
+                PLATFORM_VELOCITY);
     }
     /**
      * if platforms is out of screen delete
@@ -49,13 +59,13 @@ public class PlatformManager  implements Updatable, Drawable {
     @Override
     public <T> void update(T... obj) {
         for (int i  = 0; i < PLATFORM_COUNT; i++) {
-            Platform currentPlatform = platformList.get(i);
-            currentPlatform.update();
-            if (currentPlatform.getY() > Main.HEIGHT) {
-                currentPlatform.setY(- random.nextInt(Main.HEIGHT));
-                currentPlatform.setX(random.nextInt(Main.WIDTH));
-                currentPlatform.changeObstacleType();
+            Platform currentPlatform1 = platformList.get(i);
+            currentPlatform1.update();
+            if (currentPlatform1.getY() > Main.HEIGHT) {
+                currentPlatform1.setY(-currentPlatform1.getY() % Main.HEIGHT + HEIGHT_OFFSET);
+                currentPlatform1.setX(random.nextInt(Main.WIDTH));
             }
+
         }
     }
 
@@ -63,7 +73,9 @@ public class PlatformManager  implements Updatable, Drawable {
     public <T> void draw(T... obj) {
         for (int i  = 0; i < PLATFORM_COUNT; i++) {
             Platform currentPlatform = platformList.get(i);
+            //Platform currentPlatform2 = platformList2.get(i);
             currentPlatform.draw(obj);
+            //currentPlatform2.draw(obj);
         }
     }
 }

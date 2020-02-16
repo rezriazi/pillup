@@ -43,14 +43,14 @@ public class Game implements Drawer, Updatable {
     public void draw() {
         background.draw(gc);
         player.draw(gc);
-//        platformManager.draw(gc);
+        platformManager.draw(gc);
     }
 
     @Override
     public <T> void update(T... obj) {
         background.draw(gc);
         player.update();
-//        platformManager.update();
+        platformManager.update();
     }
 
     public void start() {
