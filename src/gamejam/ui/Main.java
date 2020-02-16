@@ -74,19 +74,15 @@ public class Main extends Application {
                 switch (keyCode) {
                     case LEFT:
                         player.move(Arrow.LEFT);
-                        System.out.println("LEFT");
                         break;
                     case RIGHT:
                         player.move(Arrow.RIGHT);
-                        System.out.println("RIGHT");
                         break;
                     case UP:
                         player.jump(Arrow.UP);
-                        System.out.println("UP");
                         break;
                     case SPACE:
                         player.jump(Arrow.SPACE);
-                        System.out.println("SPACE");
                         break;
                     default:
                         break;
