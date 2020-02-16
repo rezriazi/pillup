@@ -2,11 +2,8 @@ package gamejam.ui;
 
 import gamejam.model.interfaces.Drawable;
 import gamejam.model.utils.Background;
-import javafx.event.EventHandler;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -28,14 +25,14 @@ public class EscapeMenu implements Drawable {
     private static final double BUTTON_WIDTH = 100;
     private static final double BUTTON_HEIGHT = 50;
 
-    private static final double RESUME_BUTTON_X = Main.CANVAS_WIDTH - (BUTTON_WIDTH / 2);
+    private static final double RESUME_BUTTON_X = Main.CANVAS_WIDTH / 2 - (BUTTON_WIDTH / 2);
     private static final double RESUME_BUTTON_Y = Main.CANVAS_HEIGHT / 3;
 
-    private static final double RESTART_BUTTON_X = Main.CANVAS_WIDTH - (BUTTON_WIDTH / 2);
-    private static final double RESTART_BUTTON_Y = Main.CANVAS_HEIGHT / 3 + BUTTON_HEIGHT + 10;
+    private static final double RESTART_BUTTON_X = Main.CANVAS_WIDTH / 2 - (BUTTON_WIDTH / 2);
+    private static final double RESTART_BUTTON_Y = Main.CANVAS_HEIGHT / 3 + BUTTON_HEIGHT + 50;
 
-    private static final double QUIT_BUTTON_X = Main.CANVAS_WIDTH - (BUTTON_WIDTH / 2);
-    private static final double QUIT_BUTTON_Y = Main.CANVAS_HEIGHT / 3 + 2 * BUTTON_HEIGHT + 10;
+    private static final double QUIT_BUTTON_X = Main.CANVAS_WIDTH / 2 - (BUTTON_WIDTH / 2);
+    private static final double QUIT_BUTTON_Y = Main.CANVAS_HEIGHT / 3 + 2 * BUTTON_HEIGHT + 50;
 
     private Background background;
 
@@ -76,17 +73,20 @@ public class EscapeMenu implements Drawable {
 
     private <T> void drawResumeButton(T ... obj) {
         GraphicsContext gc = (GraphicsContext) obj[0];
-        gc.drawImage(restartButtonImage, RESUME_BUTTON_X, RESUME_BUTTON_Y);
+//        gc.drawImage(restartButtonImage, RESUME_BUTTON_X, RESUME_BUTTON_Y);
+        gc.fillRect(RESTART_BUTTON_X, RESTART_BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT);
     }
 
     private <T> void drawRestartButton(T ... obj) {
         GraphicsContext gc = (GraphicsContext) obj[0];
-        gc.drawImage(restartButtonImage, RESTART_BUTTON_X, RESTART_BUTTON_Y);
+//        gc.drawImage(restartButtonImage, RESTART_BUTTON_X, RESTART_BUTTON_Y);
+        gc.fillRect(RESTART_BUTTON_X, RESTART_BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT);
     }
 
     private <T> void drawQuitButton(T ... obj) {
         GraphicsContext gc = (GraphicsContext) obj[0];
-        gc.drawImage(quitButtonImage, QUIT_BUTTON_X, QUIT_BUTTON_Y);
+//        gc.drawImage(quitButtonImage, QUIT_BUTTON_X, QUIT_BUTTON_Y);
+        gc.fillRect(QUIT_BUTTON_X, QUIT_BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT);
     }
 
 
