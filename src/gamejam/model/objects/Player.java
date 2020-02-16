@@ -19,8 +19,10 @@ public class Player extends Object {
     private static final double PLAYER_INIT_X = Main.WIDTH /2 - PLAYER_WIDTH/2;
     private static final double PLAYER_INIT_Y = Main.HEIGHT - 2 * PLAYER_HEIGHT;
 
+
     private Animation action;
     private Animation actionX;
+    private int level;
 
     public Player(){
         super(PLAYER_INIT_X,PLAYER_INIT_Y, PLAYER_HEIGHT, PLAYER_WIDTH, 5,-5);
@@ -67,15 +69,26 @@ public class Player extends Object {
             this.moveX();
         }
 
+        this.inBound();
 
-        if (this.getY() + this.getH() >= Main.GROUND){
-            this.setY(Main.GROUND);
+    }
+
+    private void inBound() {
+        if (this.getY() + this.getH() >= Main.CANVAS_HEIGHT){
+            this.setY(Main.CANVAS_HEIGHT - this.getH());
+        }else if(this.getY() <= 0){
+            this.setY(0);
+        }
+        if(this.getX() <= 0){
+            this.setX(0);
+        }else if(this.getX() + this.getW() >= Main.CANVAS_WIDTH){
+            this.setX(Main.CANVAS_WIDTH - this.getW());
         }
     }
 
     // TODO
     public void levelUp() {
-
+        this.level++;
     }
 
     // TODO
