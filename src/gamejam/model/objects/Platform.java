@@ -11,10 +11,11 @@ import java.util.Random;
 
 public class Platform extends Object implements Updatable, Drawable {
 
-
-
     private static final int PILL_WIDTH = 50;
     private static final int PILL_HEIGHT = 20;
+
+    private static final int OVERALL_ODDS = 10;
+    private static final int PILL_ODDS_INDEX = 9;
 
     enum types {
         PILL,
@@ -72,7 +73,12 @@ public class Platform extends Object implements Updatable, Drawable {
 
     public void changeType() {
         Random random = new Random();
-        this.type = types.values()[random.nextInt(types.values().length)];
+        int index = random.nextInt(OVERALL_ODDS) + 1;
+        if (index > PILL_ODDS_INDEX) {
+            this.type = types.PILL;
+        } else {
+            this.type = types.SPIKE;
+        }
         if (this.type == types.PILL) {
             this.pillColor = PillColors.values()[random.nextInt(PillColors.values().length)];
         } else {
