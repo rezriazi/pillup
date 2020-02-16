@@ -20,9 +20,9 @@ public class GameOver implements Drawable {
             System.getProperty("user.dir") + "/src/gamejam/assets/gameover-new.jpg";
 
     private static final String RESTART_BUTTON_PATH =
-            System.getProperty("user.dir") + "/src/gamejam/assets/RESTART_BUTTON.png";
+            System.getProperty("user.dir") + "/src/gamejam/assets/RESTARTBUTTON.png";
     private static final String QUIT_BUTTON_PATH =
-            System.getProperty("user.dir") + "/src/gamejam/assets/QUIT_BUTTON.png";
+            System.getProperty("user.dir") + "/src/gamejam/assets/QUITBUTTON.png";
 
     private static final double RESTART_BUTTON_W = 200;
     private static final double RESTART_BUTTON_H = 75;
