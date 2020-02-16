@@ -7,10 +7,12 @@ import javafx.scene.canvas.GraphicsContext;
 import java.util.Random;
 
 public class Platform extends Object implements Updatable, Drawable {
+
     enum types {
-        FLAME_SHIELD,
-        FLAME,
-        FLOAT,
+        FOOD,
+        PILL,
+        DEGREE,
+        MONEY,
     }
 
     private types type;
@@ -35,6 +37,8 @@ public class Platform extends Object implements Updatable, Drawable {
         gc.fillRect(getX(),getY(),getW(),getH());
     }
 
+
+
     @Override
     public <T> void update(T... obj) {
         move(obj);
@@ -42,7 +46,7 @@ public class Platform extends Object implements Updatable, Drawable {
 
     public void changeType() {
         Random random = new Random();
-        this.type = types.values()[random.nextInt(Item.types.values().length)];
+        this.type = types.values()[random.nextInt(types.values().length)];
     }
 
 }

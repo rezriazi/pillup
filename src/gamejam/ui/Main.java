@@ -20,8 +20,12 @@ public class Main extends Application {
     public static final int SCENE_WIDTH = 540;
     public static final int SCENE_HEIGHT = 600;
 
+
+
     public static final int CANVAS_WIDTH = SCENE_WIDTH;
     public static final int CANVAS_HEIGHT = SCENE_HEIGHT;
+
+    public static final double GROUND = CANVAS_HEIGHT - 100;
 
     private Stage window;
     private Scene scene;
