@@ -1,14 +1,10 @@
 package gamejam.model.objects;
 
-import gamejam.model.managers.PlatformManager;
 import gamejam.model.utils.Animation;
 import gamejam.model.utils.Arrow;
 import gamejam.ui.Main;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class Player extends Object {
@@ -33,15 +29,12 @@ public class Player extends Object {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-//        action.start();
     }
 
 
     @Override
     public <T> void draw(T... obj) {
         GraphicsContext gc = (GraphicsContext) obj[0];
-//        gc.setFill(Color.RED);
-//        gc.fillRect(getX(),getY(),getW(),getH());
         gc.drawImage(this.getImage(),this.getX(),this.getY(),this.getW(),this.getH());
     }
 
@@ -50,7 +43,6 @@ public class Player extends Object {
         Arrow arrow = (Arrow) obj[0];
         this.setxVel(Math.abs(this.getxVel()) * arrow.getValue());
         actionX.start();
-        //this.setX(this.getX() + (arrow.getValue() * this.getxVel()));
     }
 
     @Override
@@ -76,7 +68,6 @@ public class Player extends Object {
 
         if(this.getY() + this.getH() >= Main.CANVAS_HEIGHT){
             this.setY(Main.CANVAS_HEIGHT - this.getH());
-            //System.out.println("out of the scene");
         }
     }
 

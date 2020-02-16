@@ -85,7 +85,6 @@ public class PlatformManager  implements Updatable, Drawable {
     public boolean playerCollision() {
         for (int i = 0; i < PLATFORM_COUNT; i++) {
             if (platformList.get(i).hits(this.player)) {
-                System.out.println("Player Hit");
                 return true;
             }
         }
