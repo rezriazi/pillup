@@ -77,4 +77,19 @@ public class Player extends Object {
     public void levelUp() {
 
     }
+
+    // TODO
+    public void getsFood() {
+
+    }
+
+    // TODO
+    public void dies() {
+
+    }
+
+    // TODO
+    public void getsOld() {
+
+    }
 }

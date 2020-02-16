@@ -15,7 +15,7 @@ public class Platform extends Object implements Updatable, Drawable {
         MONEY,
     }
 
-    private types type;
+    private types type = types.FOOD;
     public Platform(double x, double y, double w, double h, double yVel) {
         super(x, y, w, h, 0, yVel);
         changeType();
@@ -36,8 +36,6 @@ public class Platform extends Object implements Updatable, Drawable {
         GraphicsContext gc = (GraphicsContext) obj[0];
         gc.fillRect(getX(),getY(),getW(),getH());
     }
-
-
 
     @Override
     public <T> void update(T... obj) {
