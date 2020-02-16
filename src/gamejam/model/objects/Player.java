@@ -11,6 +11,9 @@ public class Player extends Object {
     private static final String LITTLE_BOY_PATH =
             System.getProperty("user.dir") +
                     "/src/gamejam/assets/littleboy1!.png";
+    private static final String LITTLE_BOY_PATH_1 =
+            System.getProperty("user.dir") +
+                    "/src/gamejam/assets/littleboy2!.png";
 
     private static final long JUMP_ANIMATION = 250;
     private static final long X_ANIMATION = 150;
@@ -22,12 +25,13 @@ public class Player extends Object {
 
     private Animation action;
     private Animation actionX;
-    private int level;
+
+
 
     public Player(){
         super(PLAYER_INIT_X,PLAYER_INIT_Y, PLAYER_HEIGHT, PLAYER_WIDTH, 5,-5);
         action = new Animation(JUMP_ANIMATION);
-        actionX = new Animation(X_ANIMATION);
+        actionX = new Animation(X_ANIMATION,LITTLE_BOY_PATH,LITTLE_BOY_PATH_1);
         try {
             this.setImage(LITTLE_BOY_PATH);
         } catch (FileNotFoundException e) {
@@ -39,7 +43,8 @@ public class Player extends Object {
     @Override
     public <T> void draw(T... obj) {
         GraphicsContext gc = (GraphicsContext) obj[0];
-        gc.drawImage(this.getImage(),this.getX(),this.getY(),this.getW(),this.getH());
+       // gc.drawImage(this.getImage(),this.getX(),this.getY(),this.getW(),this.getH());
+        gc.drawImage(this.actionX.getCurrentImage(),this.getX(),this.getY(),this.getW(),this.getH());
     }
 
     @Override
@@ -62,7 +67,10 @@ public class Player extends Object {
         if(action.isInAction()) {
             this.moveY();
         } else {
-            this.moveY(Object.GRAVITY);
+            if (this.getY() + this.getH() < Main.GROUND) {
+                this.moveY(Object.GRAVITY);
+            }
+
         }
 
         if (actionX.isInAction()) {
@@ -74,9 +82,10 @@ public class Player extends Object {
     }
 
     private void inBound() {
-        if (this.getY() + this.getH() >= Main.CANVAS_HEIGHT){
-            this.setY(Main.CANVAS_HEIGHT - this.getH());
-        }else if(this.getY() <= 0){
+        //if (this.getY() + this.getH() >= Main.CANVAS_HEIGHT){
+        //            this.setY(Main.CANVAS_HEIGHT - this.getH());
+        //        }else
+         if(this.getY() <= 0){
             this.setY(0);
         }
         if(this.getX() <= 0){
@@ -86,23 +95,18 @@ public class Player extends Object {
         }
     }
 
-    // TODO
-    public void levelUp() {
-        this.level++;
-    }
 
-    // TODO
-    public void getsFood() {
-
-    }
-
-    // TODO
-    public void dies() {
-
-    }
-
-    // TODO
-    public void getsOld() {
-
+    public void pill(String type){
+        switch (type){
+            case "red":
+                //bigger
+                break;
+            case "blue":
+                //older
+                break;
+            case "yellow":
+                //younger
+                break;
+        }
     }
 }

@@ -13,7 +13,7 @@ import java.io.FileNotFoundException;
 
 public abstract class Object implements Movable, Drawable, Updatable {
 
-    public static final double GRAVITY = 2.16969;
+    public static final double GRAVITY = 3;
 
     private double x;
     private double y;
