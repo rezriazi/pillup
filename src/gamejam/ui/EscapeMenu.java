@@ -12,7 +12,7 @@ public class EscapeMenu implements Drawable {
 
     // TODO: PATH AND IMG
     private static final String ESCAPE_MENU_BACKGROUND_PATH =
-            System.getProperty("user.dir") + "/src/gamejam/assets/background_day.png";
+            System.getProperty("user.dir") + "/src/gamejam/assets/background_darkmode.png";
 
     // TODO: PATHS
     private static final String RESUME_BUTTON_PATH =
@@ -95,54 +95,31 @@ public class EscapeMenu implements Drawable {
         gc.drawImage(quitButtonImage, QUIT_BUTTON_X, QUIT_BUTTON_Y);
     }
 
-
     public void onClick(double mouseX,double mouseY){
         if (isOnResumeButton(mouseX, mouseY)) {
-                    // TODO: Resume button is clicked
-                    resumeRunnable.run();
-                } else if (isOnRestartButton(mouseX, mouseY)) {
-                    // TODO: Restart button is clicked
-                    restartRunnable.run();
-                } else if (isOnQuitButton(mouseX, mouseY)) {
-                    // TODO: Quit button is clicked
-                    quitRunnable.run();
-                }
+            // TODO: Resume button is clicked
+            resumeRunnable.run();
+        } else if (isOnRestartButton(mouseX, mouseY)) {
+            // TODO: Restart button is clicked
+            restartRunnable.run();
+        } else if (isOnQuitButton(mouseX, mouseY)) {
+            // TODO: Quit button is clicked
+            quitRunnable.run();
+        }
     }
 
-//    public void setupCanvas() {
-//        canvas.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                double mouseX = event.getSceneX();
-//                double mouseY = event.getSceneY();
-//
-//                if (isOnResumeButton(mouseX, mouseY)) {
-//                    // TODO: Resume button is clicked
-//                    resumeRunnable.run();
-//                } else if (isOnRestartButton(mouseX, mouseY)) {
-//                    // TODO: Restart button is clicked
-//                    restartRunnable.run();
-//                } else if (isOnQuitButton(mouseX, mouseY)) {
-//                    // TODO: Quit button is clicked
-//                    quitRunnable.run();
-//                }
-//            }
-//        });
-//    }
-
-
     private boolean isOnResumeButton(double mX, double mY) {
-        return (mX >= RESUME_BUTTON_X && mX <= RESUME_BUTTON_X + BUTTON_WIDTH)
-                && (mY >= RESUME_BUTTON_Y && mY <= RESUME_BUTTON_Y + BUTTON_HEIGHT);
+        return (mX >= RESUME_BUTTON_X && mX <= RESUME_BUTTON_X + resumeButtonImage.getWidth())
+                && (mY >= RESUME_BUTTON_Y && mY <= RESUME_BUTTON_Y + resumeButtonImage.getHeight());
     }
 
     private boolean isOnRestartButton(double mX, double mY) {
-        return (mX >= RESTART_BUTTON_X && mX <= RESTART_BUTTON_X + BUTTON_WIDTH)
-                && (mY >= RESTART_BUTTON_Y && mY <= RESTART_BUTTON_Y + BUTTON_HEIGHT);
+        return (mX >= RESTART_BUTTON_X && mX <= RESTART_BUTTON_X + restartButtonImage.getWidth())
+                && (mY >= RESTART_BUTTON_Y && mY <= RESTART_BUTTON_Y + restartButtonImage.getHeight());
     }
 
     private boolean isOnQuitButton(double mX, double mY) {
-        return (mX >= QUIT_BUTTON_X && mX <= QUIT_BUTTON_X + BUTTON_WIDTH)
-                && (mY >= QUIT_BUTTON_Y && mY <= QUIT_BUTTON_Y + BUTTON_HEIGHT);
+        return (mX >= QUIT_BUTTON_X && mX <= QUIT_BUTTON_X + quitButtonImage.getWidth())
+                && (mY >= QUIT_BUTTON_Y && mY <= QUIT_BUTTON_Y + quitButtonImage.getHeight());
     }
 }
