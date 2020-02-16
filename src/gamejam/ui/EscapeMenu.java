@@ -101,6 +101,7 @@ public class EscapeMenu implements Drawable {
             resumeRunnable.run();
         } else if (isOnRestartButton(mouseX, mouseY)) {
             // TODO: Restart button is clicked
+            System.out.println("restrat");
             restartRunnable.run();
         } else if (isOnQuitButton(mouseX, mouseY)) {
             // TODO: Quit button is clicked

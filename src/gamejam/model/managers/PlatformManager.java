@@ -20,7 +20,7 @@ public class PlatformManager  implements Updatable, Drawable {
 
     private static final String BLUE_PILL_PATH =
             System.getProperty("user.dir") +
-                    "/src/gamejam/assets/bluepillnew.png";
+                    "/src/gamejam/assets/bluenewpill.png";
 
     private static final String RED_PILL_PATH =
             System.getProperty("user.dir") +
@@ -28,7 +28,7 @@ public class PlatformManager  implements Updatable, Drawable {
 
     private static final String YELLOW_PILL_PATH =
             System.getProperty("user.dir") +
-                    "/src/gamejam/assets/yellowpillnew.png";
+                    "/src/gamejam/assets/yellownewpill.png";
 
     public static Image redImg = null;
     public static Image blueImg = null;

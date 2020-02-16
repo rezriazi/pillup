@@ -2,6 +2,7 @@ package gamejam.model.objects;
 
 import gamejam.model.utils.Animation;
 import gamejam.model.utils.Arrow;
+import gamejam.model.utils.Score;
 import gamejam.ui.Main;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -39,6 +40,7 @@ public class Player extends Object {
     private static final double PLAYER_INIT_Y = Main.HEIGHT - 2 * PLAYER_HEIGHT;
 
 
+
     public static double dx = 9;
 
     private static final double RED_PILL_RATIO = 10;
@@ -54,11 +56,13 @@ public class Player extends Object {
 
     private Age age;
     int ageCount;
+    private Score score;
 
     public Player() {
         super(PLAYER_INIT_X,PLAYER_INIT_Y, PLAYER_HEIGHT, PLAYER_WIDTH, 5,-5);
         changeCharacter(Age.YOUNG);
         dx = 9;
+        score = new Score();
     }
 
     public Player(Age a){
@@ -109,6 +113,8 @@ public class Player extends Object {
             gc.drawImage(this.action.getCurrentImage(),this.getX(),this.getY(),this.getW(),this.getH());
         }
 
+        score.draw(10,10);
+
     }
 
     @Override
@@ -143,6 +149,7 @@ public class Player extends Object {
 
         this.updateCharacter();
         this.inBound();
+        score.update();
 
     }
 
