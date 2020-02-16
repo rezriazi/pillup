@@ -70,8 +70,8 @@ public class Game implements Drawer, Updatable {
 
         this.state = State.MAIN_MENU;
 
-        this.sound = new Media(new File(MP3_PATH).toURI().toString());
-        this.mediaPlayer = new MediaPlayer(sound);
+      //  this.sound = new Media(new File(MP3_PATH).toURI().toString());
+       // this.mediaPlayer = new MediaPlayer(sound);
     }
 
     Player getPlayer() {
@@ -131,7 +131,7 @@ public class Game implements Drawer, Updatable {
             }
         };
         at.start();
-        mediaPlayer.play();
+//        mediaPlayer.play();
     }
 
     public void setupCanvas() {
