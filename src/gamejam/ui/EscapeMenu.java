@@ -16,11 +16,11 @@ public class EscapeMenu implements Drawable {
 
     // TODO: PATHS
     private static final String RESUME_BUTTON_PATH =
-            System.getProperty("user.dir") + "/src/gamejam/assets/RESUME_BUTTON.png";
+            System.getProperty("user.dir") + "/src/gamejam/assets/RESUMEBUTTON.png";
     private static final String RESTART_BUTTON_PATH =
-            System.getProperty("user.dir") + "/src/gamejam/assets/RESTART_BUTTON.png";
+            System.getProperty("user.dir") + "/src/gamejam/assets/RESTARTBUTTON.png";
     private static final String QUIT_BUTTON_PATH =
-            System.getProperty("user.dir") + "/src/gamejam/assets/QUIT_BUTTON.png";
+            System.getProperty("user.dir") + "/src/gamejam/assets/QUITBUTTON.png";
 
     private static final double BUTTON_WIDTH = 200;
     private static final double BUTTON_HEIGHT = 75;

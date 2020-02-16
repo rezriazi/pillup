@@ -13,7 +13,7 @@ public class MainMenu implements Drawable {
     private static final String MAIN_MENU_BACKGROUND_PATH =
             System.getProperty("user.dir") + "/src/gamejam/assets/mainscreen2.jpg";
     private static final String PLAY_BUTTON_PATH =
-            System.getProperty("user.dir") + "/src/gamejam/assets/PLAY_BUTTON.png";
+            System.getProperty("user.dir") + "/src/gamejam/assets/PLAYBUTTON.png";
     private static final String SETTINGS_BUTTON_PATH =
             System.getProperty("user.dir") + "/src/gamejam/assets/SETTINGS_BUTTON.png";
 
