@@ -100,12 +100,9 @@ public class Main extends Application {
     }
 
     private void setupGameOverScene() {
-        GameOverScene go = GameOverScene.getInstance(this.window);
+        GameOverScene go = GameOverScene.getInstance();
         this.gameOver = go.getScene();
     }
 
-    public void setScene(Scene scene) {
-        this.window.setScene(scene);
-    }
 
 }
