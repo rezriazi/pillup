@@ -88,7 +88,7 @@ public class Game implements Drawer, Updatable {
 
     @Override
     public void draw() {
-        gc.setFill(Color.WHITE);
+        //gc.setFill(Color.WHITE);
         background.draw(gc);
         player.draw(gc);
         platformManager.draw(gc);
@@ -146,9 +146,11 @@ public class Game implements Drawer, Updatable {
             public void handle(MouseEvent event) {
                 double mouseX = event.getSceneX();
                 double mouseY = event.getSceneY();
+                if(state == State.MAIN_MENU) {
+                    mainMenu.onClick(mouseX,mouseY);
+                    escapeMenu.onClick(mouseX,mouseY);
+                }
 
-                mainMenu.onClick(mouseX,mouseY);
-                escapeMenu.onClick(mouseX,mouseY);
 
             }
         });
