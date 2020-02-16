@@ -32,9 +32,14 @@ public class MainMenu implements Drawable {
     private Background background;
     private Canvas canvas;
 
+    private Image playButtonImage;
+    private Image settingsButtonImage;
+
     public MainMenu(Canvas canvas) throws FileNotFoundException {
         this.background = new Background(new FileInputStream(MAIN_MENU_BACKGROUND_PATH));
         this.canvas = canvas;
+        this.playButtonImage = new Image(new FileInputStream(PLAY_BUTTON_PATH));
+        this.settingsButtonImage = new Image(new FileInputStream(SETTINGS_BUTTON_PATH));
         setupCanvas();
     }
 
@@ -57,14 +62,12 @@ public class MainMenu implements Drawable {
 
     private <T> void drawPlayButton(T ... obj) throws FileNotFoundException {
         GraphicsContext gc = (GraphicsContext) obj[0];
-        gc.drawImage(new Image(new FileInputStream(PLAY_BUTTON_PATH)),
-                PLAY_BUTTON_X, PLAY_BUTTON_Y);
+        gc.drawImage(playButtonImage, PLAY_BUTTON_X, PLAY_BUTTON_Y);
     }
 
     private <T> void drawSettingsButton(T ... obj) throws FileNotFoundException {
         GraphicsContext gc = (GraphicsContext) obj[0];
-        gc.drawImage(new Image(new FileInputStream(SETTINGS_BUTTON_PATH)),
-                SETTINGS_BUTTON_X, SETTINGS_BUTTON_Y);
+        gc.drawImage(settingsButtonImage, SETTINGS_BUTTON_X, SETTINGS_BUTTON_Y);
     }
 
     public void setupCanvas() {

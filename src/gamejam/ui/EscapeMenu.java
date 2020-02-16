@@ -40,9 +40,16 @@ public class EscapeMenu implements Drawable {
     private Background background;
     private Canvas canvas;
 
+    private Image resumeButtonImage;
+    private Image restartButtonImage;
+    private Image quitButtonImage;
+
     public EscapeMenu(Canvas canvas) throws FileNotFoundException {
         this.background = new Background(new FileInputStream(ESCAPE_MENU_BACKGROUND_PATH));
         this.canvas = canvas;
+        this.resumeButtonImage = new Image(new FileInputStream(RESUME_BUTTON_PATH));
+        this.restartButtonImage = new Image(new FileInputStream(RESTART_BUTTON_PATH));
+        this.quitButtonImage = new Image(new FileInputStream(QUIT_BUTTON_PATH));
         setupCanvas();
     }
 
@@ -66,23 +73,17 @@ public class EscapeMenu implements Drawable {
 
     private <T> void drawResumeButton(T ... obj) throws FileNotFoundException {
         GraphicsContext gc = (GraphicsContext) obj[0];
-        gc.drawImage(new Image(new FileInputStream(RESUME_BUTTON_PATH)),
-                RESUME_BUTTON_X,
-                RESUME_BUTTON_Y);
+        gc.drawImage(restartButtonImage, RESUME_BUTTON_X, RESUME_BUTTON_Y);
     }
 
     private <T> void drawRestartButton(T ... obj) throws FileNotFoundException {
         GraphicsContext gc = (GraphicsContext) obj[0];
-        gc.drawImage(new Image(new FileInputStream(RESTART_BUTTON_PATH)),
-                RESTART_BUTTON_X,
-                RESTART_BUTTON_Y);
+        gc.drawImage(restartButtonImage, RESTART_BUTTON_X, RESTART_BUTTON_Y);
     }
 
     private <T> void drawQuitButton(T ... obj) throws FileNotFoundException {
         GraphicsContext gc = (GraphicsContext) obj[0];
-        gc.drawImage(new Image(new FileInputStream(QUIT_BUTTON_PATH)),
-                QUIT_BUTTON_X,
-                QUIT_BUTTON_Y);
+        gc.drawImage(quitButtonImage, QUIT_BUTTON_X, QUIT_BUTTON_Y);
     }
 
     public void setupCanvas() {
