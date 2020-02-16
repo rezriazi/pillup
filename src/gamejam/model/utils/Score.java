@@ -26,7 +26,7 @@ public class Score implements Drawable, Updatable {
 
     @Override
     public <T> void update(T... obj) {
-        int time = (int) obj[0];
+        Integer time = (Integer) obj[0];
         setScore(time);
     }
 }
