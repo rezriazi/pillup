@@ -88,6 +88,9 @@ public class Main extends Application {
                     case SPACE:
                         player.jump(Arrow.SPACE);
                         break;
+                    case ESCAPE:
+                        game.openEscapeMenu();
+                        break;
                     default:
                         break;
                 }

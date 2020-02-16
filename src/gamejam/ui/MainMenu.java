@@ -34,7 +34,6 @@ public class MainMenu implements Drawable {
 
 
     private Background background;
-    private Canvas canvas;
 
     private Image playButtonImage;
     private Runnable playRunnable;
@@ -43,21 +42,17 @@ public class MainMenu implements Drawable {
 
     private Image settingsButtonImage;
 
-    public MainMenu(Canvas canvas,Runnable playRunnable) throws FileNotFoundException {
+    public MainMenu(Runnable playRunnable) throws FileNotFoundException {
         this.playRunnable = playRunnable;
         this.background = new Background(new FileInputStream(MAIN_MENU_BACKGROUND_PATH));
-        this.canvas = canvas;
         this.playButtonImage = new Image(new FileInputStream(PLAY_BUTTON_PATH));
         this.settingsButtonImage = new Image(new FileInputStream(SETTINGS_BUTTON_PATH));
-        setupCanvas();
     }
 
     @Override
     public <T> void draw(T ... obj) {
         GraphicsContext gc = (GraphicsContext) obj[0];
-
         drawBackground(gc);
-
         drawSettingsButton(gc);drawPlayButton(gc);
     }
 
@@ -74,26 +69,38 @@ public class MainMenu implements Drawable {
 
     private <T> void drawSettingsButton(T ... obj){
         GraphicsContext gc = (GraphicsContext) obj[0];
+        gc.setFill(Color.BLUE);
+        gc.fillOval(SETTINGS_BUTTON_X,SETTINGS_BUTTON_Y,SETTINGS_BUTTON_RADIUS,SETTINGS_BUTTON_RADIUS);
         //gc.drawImage(settingsButtonImage, SETTINGS_BUTTON_X, SETTINGS_BUTTON_Y);
     }
 
-    public void setupCanvas() {
-        canvas.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                double mouseX = event.getSceneX();
-                double mouseY = event.getSceneY();
-                System.out.println("play clicked");
-                if (isOnPlayButton(mouseX, mouseY)) {
+    public void onClick(double mouseX,double mouseY){
+        if (isOnPlayButton(mouseX, mouseY)) {
                     // TODO: Play button is clicked
 
                     playRunnable.run();
                 } else if (isOnSettingsButton(mouseX, mouseY)) {
                     // TODO: Settings button is clicked
                 }
-            }
-        });
     }
+
+//    public void setupCanvas() {
+//        canvas.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent event) {
+//                double mouseX = event.getSceneX();
+//                double mouseY = event.getSceneY();
+//                System.out.println("play clicked");
+//                if (isOnPlayButton(mouseX, mouseY)) {
+//                    // TODO: Play button is clicked
+//
+//                    playRunnable.run();
+//                } else if (isOnSettingsButton(mouseX, mouseY)) {
+//                    // TODO: Settings button is clicked
+//                }
+//            }
+//        });
+//    }
 
     private boolean isOnPlayButton(double mX, double mY) {
         return (mX >= PLAY_BUTTON_X - PLAY_BUTTON_RADIUS

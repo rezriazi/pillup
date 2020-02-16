@@ -6,8 +6,10 @@ import gamejam.model.managers.PlatformManager;
 import gamejam.model.objects.Player;
 import gamejam.model.utils.Background;
 import javafx.animation.AnimationTimer;
+import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -49,13 +51,13 @@ public class Game implements Drawer, Updatable {
         this.player = new Player();
         this.platformManager = new PlatformManager(this.player);
         this.canvas  = c;
-        this.mainMenu = new MainMenu(this.canvas, new Runnable() {
+        this.mainMenu = new MainMenu(new Runnable() {
             @Override
             public void run() {
                 state = State.PLAYING;
             }
         });
-        this.escapeMenu = new EscapeMenu(this.canvas, new Runnable() {
+        this.escapeMenu = new EscapeMenu(new Runnable() {
             @Override
             public void run() {
                 state = State.PLAYING;
@@ -72,6 +74,8 @@ public class Game implements Drawer, Updatable {
                 state = State.MAIN_MENU;
             }
         });
+
+        this.setupCanvas();
         this.gc = gc;
 
         this.state = State.MAIN_MENU;
@@ -133,4 +137,28 @@ public class Game implements Drawer, Updatable {
         };
         at.start();
     }
+
+    public void setupCanvas() {
+        canvas.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                double mouseX = event.getSceneX();
+                double mouseY = event.getSceneY();
+
+                mainMenu.onClick(mouseX,mouseY);
+                escapeMenu.onClick(mouseX,mouseY);
+
+            }
+        });
+    }
+
+
+    public void openEscapeMenu(){
+        if(state == State.PLAYING){
+            state = State.ESC_MENU;
+        }
+    }
+
+
+
 }

@@ -38,7 +38,6 @@ public class EscapeMenu implements Drawable {
     private static final double QUIT_BUTTON_Y = Main.CANVAS_HEIGHT / 3 + 2 * BUTTON_HEIGHT + 10;
 
     private Background background;
-    private Canvas canvas;
 
     private Runnable resumeRunnable;
     private Runnable restartRunnable;
@@ -48,61 +47,51 @@ public class EscapeMenu implements Drawable {
     private Image restartButtonImage;
     private Image quitButtonImage;
 
-    public EscapeMenu(Canvas canvas, Runnable resumeRunnable,
+    public EscapeMenu(Runnable resumeRunnable,
                       Runnable restartRunnable,
                       Runnable quitRunnable) throws FileNotFoundException {
         this.resumeRunnable = resumeRunnable;
         this.restartRunnable = restartRunnable;
         this.quitRunnable = quitRunnable;
         this.background = new Background(new FileInputStream(ESCAPE_MENU_BACKGROUND_PATH));
-        this.canvas = canvas;
         this.resumeButtonImage = new Image(new FileInputStream(RESUME_BUTTON_PATH));
         this.restartButtonImage = new Image(new FileInputStream(RESTART_BUTTON_PATH));
         this.quitButtonImage = new Image(new FileInputStream(QUIT_BUTTON_PATH));
-        setupCanvas();
     }
 
     @Override
     public <T> void draw(T... obj) {
         GraphicsContext gc = (GraphicsContext) obj[0];
 
-        drawBackground();
-        try {
-            drawResumeButton(gc);
-            drawRestartButton(gc);
-            drawQuitButton(gc);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        drawBackground(gc);
+        drawResumeButton(gc);
+        drawRestartButton(gc);
+        drawQuitButton(gc);
+
     }
 
     private <T> void drawBackground(T ... obj) {
         background.draw(obj);
     }
 
-    private <T> void drawResumeButton(T ... obj) throws FileNotFoundException {
+    private <T> void drawResumeButton(T ... obj) {
         GraphicsContext gc = (GraphicsContext) obj[0];
         gc.drawImage(restartButtonImage, RESUME_BUTTON_X, RESUME_BUTTON_Y);
     }
 
-    private <T> void drawRestartButton(T ... obj) throws FileNotFoundException {
+    private <T> void drawRestartButton(T ... obj) {
         GraphicsContext gc = (GraphicsContext) obj[0];
         gc.drawImage(restartButtonImage, RESTART_BUTTON_X, RESTART_BUTTON_Y);
     }
 
-    private <T> void drawQuitButton(T ... obj) throws FileNotFoundException {
+    private <T> void drawQuitButton(T ... obj) {
         GraphicsContext gc = (GraphicsContext) obj[0];
         gc.drawImage(quitButtonImage, QUIT_BUTTON_X, QUIT_BUTTON_Y);
     }
 
-    public void setupCanvas() {
-        canvas.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                double mouseX = event.getSceneX();
-                double mouseY = event.getSceneY();
 
-                if (isOnResumeButton(mouseX, mouseY)) {
+    public void onClick(double mouseX,double mouseY){
+        if (isOnResumeButton(mouseX, mouseY)) {
                     // TODO: Resume button is clicked
                     resumeRunnable.run();
                 } else if (isOnRestartButton(mouseX, mouseY)) {
@@ -112,9 +101,29 @@ public class EscapeMenu implements Drawable {
                     // TODO: Quit button is clicked
                     quitRunnable.run();
                 }
-            }
-        });
     }
+
+//    public void setupCanvas() {
+//        canvas.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent event) {
+//                double mouseX = event.getSceneX();
+//                double mouseY = event.getSceneY();
+//
+//                if (isOnResumeButton(mouseX, mouseY)) {
+//                    // TODO: Resume button is clicked
+//                    resumeRunnable.run();
+//                } else if (isOnRestartButton(mouseX, mouseY)) {
+//                    // TODO: Restart button is clicked
+//                    restartRunnable.run();
+//                } else if (isOnQuitButton(mouseX, mouseY)) {
+//                    // TODO: Quit button is clicked
+//                    quitRunnable.run();
+//                }
+//            }
+//        });
+//    }
+
 
     private boolean isOnResumeButton(double mX, double mY) {
         return (mX >= RESUME_BUTTON_X && mX <= RESUME_BUTTON_X + BUTTON_WIDTH)
