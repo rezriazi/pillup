@@ -48,8 +48,7 @@ public class MainMenu implements Drawable {
     public <T> void draw(T ... obj) {
         GraphicsContext gc = (GraphicsContext) obj[0];
         drawBackground(gc);
-        drawSettingsButton(gc);
-        drawPlayButton(gc);
+        drawSettingsButton(gc);drawPlayButton(gc);
     }
 
     private <T> void drawBackground(T ... obj) {
