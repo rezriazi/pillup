@@ -48,7 +48,7 @@ public class Main extends Application {
         setupWindow();
         setupCanvas();
         setupScene();
-
+        setupGameOverScene();
         window.show();
     }
 
@@ -99,7 +99,13 @@ public class Main extends Application {
         window.setScene(scene);
     }
 
+    private void setupGameOverScene() {
+        GameOverScene go = GameOverScene.getInstance(this.window);
+        this.gameOver = go.getScene();
+    }
+
     public void setScene(Scene scene) {
         this.window.setScene(scene);
     }
+
 }

@@ -79,4 +79,9 @@ public class Player extends Object {
             //System.out.println("out of the scene");
         }
     }
+
+    // TODO
+    public void levelUp() {
+
+    }
 }

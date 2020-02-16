@@ -9,11 +9,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.stage.Stage;
 
 public class GameOverScene {
     private static GameOverScene gameOverScene = null;
     private BorderPane root;
     private Scene scene;
+    public static Stage stage;
 
     private GameOverScene() {
         root = new BorderPane();
@@ -35,12 +37,16 @@ public class GameOverScene {
         });
     }
 
-    public static GameOverScene getInstance() {
+    public static GameOverScene getInstance(Stage mainStage) {
         if (gameOverScene == null) {
             gameOverScene = new GameOverScene();
         }
-
+        stage = mainStage;
         return gameOverScene;
+    }
+
+    public Scene getScene () {
+        return this.scene;
     }
 
 }
