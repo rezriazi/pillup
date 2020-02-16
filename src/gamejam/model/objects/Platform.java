@@ -15,7 +15,7 @@ public class Platform extends Object implements Updatable, Drawable {
     private static final int PILL_HEIGHT = 20;
 
     private static final int OVERALL_ODDS = 10;
-    private static final int PILL_ODDS_INDEX = 9;
+    private static final int PILL_ODDS_INDEX = 8;
 
     enum types {
         PILL,
@@ -85,5 +85,22 @@ public class Platform extends Object implements Updatable, Drawable {
             this.pillColor = PillColors.BLUE;
         }
     }
+
+    public boolean isPill(){
+        return this.type == types.PILL;
+    }
+
+    public String getPill(){
+        switch (pillColor) {
+            case BLUE:
+                return "blue";
+            case RED:
+                return "red";
+            case YELLOW:
+                return "yellow";
+        }
+        return "";
+    }
+
 
 }

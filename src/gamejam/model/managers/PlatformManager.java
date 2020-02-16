@@ -20,15 +20,15 @@ public class PlatformManager  implements Updatable, Drawable {
 
     private static final String BLUE_PILL_PATH =
             System.getProperty("user.dir") +
-                    "/src/gamejam/assets/bluepill.jpg";
+                    "/src/gamejam/assets/bluepillnew.png";
 
     private static final String RED_PILL_PATH =
             System.getProperty("user.dir") +
-                    "/src/gamejam/assets/redpill.jpg";
+                    "/src/gamejam/assets/redpillnew.png";
 
     private static final String YELLOW_PILL_PATH =
             System.getProperty("user.dir") +
-                    "/src/gamejam/assets/yellowpill.jpg";
+                    "/src/gamejam/assets/yellowpillnew.png";
 
     public static Image redImg = null;
     public static Image blueImg = null;
@@ -93,6 +93,7 @@ public class PlatformManager  implements Updatable, Drawable {
             if (currentPlatform.getY() > Main.HEIGHT) {
                 currentPlatform.setY(-currentPlatform.getY() % Main.HEIGHT + HEIGHT_OFFSET);
                 currentPlatform.setX(Math.abs(random.nextInt(Main.WIDTH) - currentPlatform.getW()));
+                currentPlatform.changeType();
             }
         }
 
@@ -110,8 +111,18 @@ public class PlatformManager  implements Updatable, Drawable {
     //TODO
     public boolean playerCollision() {
         for (int i = 0; i < PLATFORM_COUNT; i++) {
-            if (platformList.get(i).hits(this.player)) {
-
+            Platform platform = platformList.get(i);
+            if (platform.hits(this.player,Player.dx)) {
+                if(platform.isPill()){
+                    // pill
+                    boolean b = player.pill(platform.getPill());
+                    platform.setY(-platform.getY() % Main.HEIGHT + HEIGHT_OFFSET);
+                    platform.setX(Math.abs(random.nextInt(Main.WIDTH) - platform.getW()));
+                    platform.changeType();
+                    return b;
+                }else{
+                    return true;
+                }
             }
         }
         return false;

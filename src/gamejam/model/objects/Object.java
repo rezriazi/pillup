@@ -61,8 +61,10 @@ public abstract class Object implements Movable, Drawable, Updatable {
      * @param o
      * @return
      */
-    public boolean hits(Object o) {
-        return new Rectangle(this.x,this.y,this.w,this.h).intersects(o.getX(),o.getY(),o.getW(),o.getH());
+    public boolean hits(Object o, double ... offset) {
+        double of = offset==null?0:offset[0];
+        return new Rectangle(this.x,this.y,this.w,this.h).intersects(o.getX()+of,o.getY()+of,
+                o.getW()-of,o.getH()-of);
     }
 
     protected void move() {

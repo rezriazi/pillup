@@ -32,14 +32,16 @@ public class Player extends Object {
                     "/src/gamejam/assets/oldage2!.png";
 
     private static final long JUMP_ANIMATION = 250;
-    private static final long X_ANIMATION = 150;
+    private static final long X_ANIMATION = 100;
     private static final double PLAYER_HEIGHT = 60;
     private static final double PLAYER_WIDTH = 70;
     private static final double PLAYER_INIT_X = Main.WIDTH /2 - PLAYER_WIDTH/2;
     private static final double PLAYER_INIT_Y = Main.HEIGHT - 2 * PLAYER_HEIGHT;
 
 
-    private static final double RED_PILL_RATIO = 20;
+    public static double dx = 9;
+
+    private static final double RED_PILL_RATIO = 10;
 
     enum Age {
         YOUNG,
@@ -53,9 +55,10 @@ public class Player extends Object {
     private Age age;
     int ageCount;
 
-    public Player(){
+    public Player() {
         super(PLAYER_INIT_X,PLAYER_INIT_Y, PLAYER_HEIGHT, PLAYER_WIDTH, 5,-5);
         changeCharacter(Age.YOUNG);
+        dx = 9;
     }
 
     public Player(Age a){
@@ -163,7 +166,7 @@ public class Player extends Object {
     }
 
     private void setAgeFromInt(int age){
-        switch (age){
+        switch (age) {
             case 0:
                 this.changeCharacter(Age.YOUNG);
                 break;
@@ -210,6 +213,7 @@ public class Player extends Object {
     private boolean redPill(){
         this.setW(this.getW() + RED_PILL_RATIO);
         this.setH(this.getH() + RED_PILL_RATIO);
+        dx+= RED_PILL_RATIO/4;
         if (this.getY() + this.getH() >= Main.GROUND) {
             this.setY(Main.GROUND - this.getH());
         }

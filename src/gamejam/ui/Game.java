@@ -158,7 +158,7 @@ public class Game implements Drawer, Updatable {
 
 
     public void openEscapeMenu(){
-        if(state == State.PLAYING){
+        if(state == State.PLAYING) {
             state = State.ESC_MENU;
         }
     }
