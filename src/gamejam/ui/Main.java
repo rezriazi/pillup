@@ -42,7 +42,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         window = primaryStage;
-        game = new Game(gc);
+        game = new Game(gc,canvas);
         setup();
         game.start();
     }
