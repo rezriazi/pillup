@@ -20,8 +20,12 @@ public class Main extends Application {
     public static final int SCENE_WIDTH = 540;
     public static final int SCENE_HEIGHT = 600;
 
+
+
     public static final int CANVAS_WIDTH = SCENE_WIDTH;
     public static final int CANVAS_HEIGHT = SCENE_HEIGHT;
+
+    public static final double GROUND = CANVAS_HEIGHT - 20;
 
     private Stage window;
     private Scene scene;
@@ -38,7 +42,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         window = primaryStage;
-        game = new Game(gc);
+        game = new Game(gc,canvas);
         setup();
         game.start();
     }
@@ -83,6 +87,9 @@ public class Main extends Application {
                         break;
                     case SPACE:
                         player.jump(Arrow.SPACE);
+                        break;
+                    case ESCAPE:
+                        game.openEscapeMenu();
                         break;
                     default:
                         break;

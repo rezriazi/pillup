@@ -5,7 +5,9 @@ import gamejam.model.interfaces.Updatable;
 import gamejam.model.objects.Platform;
 import gamejam.model.objects.Player;
 import gamejam.ui.Main;
+import javafx.scene.image.Image;
 
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -15,6 +17,23 @@ import java.util.Random;
  * if goes out of the screen, gets deleted and a new platform is added with random position
  * */
 public class PlatformManager  implements Updatable, Drawable {
+
+    private static final String BLUE_PILL_PATH =
+            System.getProperty("user.dir") +
+                    "/src/gamejam/assets/bluepill.jpg";
+
+    private static final String RED_PILL_PATH =
+            System.getProperty("user.dir") +
+                    "/src/gamejam/assets/redpill.jpg";
+
+    private static final String YELLOW_PILL_PATH =
+            System.getProperty("user.dir") +
+                    "/src/gamejam/assets/yellowpill.jpg";
+
+    public static Image redImg = null;
+    public static Image blueImg = null;
+    public static Image yellowImg = null;
+
     private Random random = new Random();
     private static final int PLATFORM_COUNT = 7;
     private static final int PLATFORM_HEIGHT = 15;
@@ -31,6 +50,13 @@ public class PlatformManager  implements Updatable, Drawable {
         platformList = new ArrayList<>();
         fillPlatformList();
         this.player = player;
+        try {
+            redImg = new Image(new FileInputStream(RED_PILL_PATH));
+            blueImg = new Image(new FileInputStream(BLUE_PILL_PATH));
+            yellowImg = new Image(new FileInputStream(YELLOW_PILL_PATH));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -62,11 +88,11 @@ public class PlatformManager  implements Updatable, Drawable {
     @Override
     public <T> void update(T... obj) {
         for (int i  = 0; i < PLATFORM_COUNT; i++) {
-            Platform currentPlatform1 = platformList.get(i);
-            currentPlatform1.update();
-            if (currentPlatform1.getY() > Main.HEIGHT) {
-                currentPlatform1.setY(-currentPlatform1.getY() % Main.HEIGHT + HEIGHT_OFFSET);
-                currentPlatform1.setX(random.nextInt(Main.WIDTH));
+            Platform currentPlatform = platformList.get(i);
+            currentPlatform.update();
+            if (currentPlatform.getY() > Main.HEIGHT) {
+                currentPlatform.setY(-currentPlatform.getY() % Main.HEIGHT + HEIGHT_OFFSET);
+                currentPlatform.setX(Math.abs(random.nextInt(Main.WIDTH) - currentPlatform.getW()));
             }
         }
 
@@ -85,7 +111,7 @@ public class PlatformManager  implements Updatable, Drawable {
     public boolean playerCollision() {
         for (int i = 0; i < PLATFORM_COUNT; i++) {
             if (platformList.get(i).hits(this.player)) {
-                return true;
+
             }
         }
         return false;

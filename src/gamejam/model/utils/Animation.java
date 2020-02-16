@@ -3,6 +3,8 @@ package gamejam.model.utils;
 import gamejam.model.interfaces.Updatable;
 import javafx.scene.image.Image;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class Animation implements Updatable {
@@ -21,8 +23,14 @@ public class Animation implements Updatable {
     }
 
     private void initImages(String ... place){
+        this.images = new ArrayList<>();
         for(String s: place){
-            Image i = new Image(s);
+            Image i = null;
+            try {
+                i = new Image(new FileInputStream(s));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
             this.images.add(i);
         }
     }
@@ -49,7 +57,12 @@ public class Animation implements Updatable {
     @Override
     public <T> void update(T... obj) {
         if(isInAction){
-            index++;
+            if(index + 1 >= this.images.size()){
+                this.index = 0;
+            }else{
+                index++;
+            }
+
             this.check();
         }
     }
