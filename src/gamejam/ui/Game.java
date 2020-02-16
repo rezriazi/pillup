@@ -21,15 +21,16 @@ public class Game implements Drawer, Updatable {
             System.getProperty("user.dir") +
                     "/src/gamejam/assets/background_day.png";
 
-    private final Player player;
+    private Player player;
     private final Background background;
-    private final PlatformManager platformManager;
+    private PlatformManager platformManager;
     private final GraphicsContext gc;
     private final Canvas canvas;
 
     //main menu
     private final MainMenu mainMenu;
     private final EscapeMenu escapeMenu;
+    private final GameOver gameOver;
 
     private boolean running = false;
 
@@ -52,30 +53,10 @@ public class Game implements Drawer, Updatable {
         this.player = new Player();
         this.platformManager = new PlatformManager(this.player);
         this.canvas  = c;
-        this.mainMenu = new MainMenu(new Runnable() {
-            @Override
-            public void run() {
-                state = State.PLAYING;
-            }
-        });
-        this.escapeMenu = new EscapeMenu(new Runnable() {
-            @Override
-            public void run() {
-                state = State.PLAYING;
-            }
-        }, new Runnable() {
-            @Override
-            public void run() {
-                at.stop();
-                state = State.PLAYING;
-            }
-        }, new Runnable() {
-            @Override
-            public void run() {
-                state = State.MAIN_MENU;
-            }
-        });
+        this.mainMenu = new MainMenu(this::startGame);
+        this.escapeMenu = new EscapeMenu(this::resume, this::restart, this::quitToMainMenu);
 
+        this.gameOver = new GameOver(this::restart, this::quitToMainMenu);
         this.setupCanvas();
         this.gc = gc;
 
@@ -121,6 +102,7 @@ public class Game implements Drawer, Updatable {
                                 mainMenu.draw(gc);
                                 break;
                             case LOST:
+                                gameOver.draw(gc);
                                 break;
                             case PLAYING:
                                 gc.clearRect(0, 0, Main.CANVAS_WIDTH, Main.CANVAS_HEIGHT);
@@ -146,9 +128,12 @@ public class Game implements Drawer, Updatable {
             public void handle(MouseEvent event) {
                 double mouseX = event.getSceneX();
                 double mouseY = event.getSceneY();
-                if(state == State.MAIN_MENU) {
+                if(state == State.MAIN_MENU ) {
                     mainMenu.onClick(mouseX,mouseY);
+                }else if(state == State.ESC_MENU){
                     escapeMenu.onClick(mouseX,mouseY);
+                }else if(state == State.LOST){
+                    gameOver.onClick(mouseX,mouseY);
                 }
 
 
@@ -163,6 +148,24 @@ public class Game implements Drawer, Updatable {
         }
     }
 
+    public void quitToMainMenu() {
+        this.state = State.MAIN_MENU;
+    }
+
+    public void restart(){
+        this.player = new Player();
+        this.platformManager = new PlatformManager(this.player);
+        state = State.PLAYING;
+    }
+
+    public void resume() {
+        state = State.PLAYING;
+    }
+
+    public void startGame(){
+        restart();
+        state = State.PLAYING;
+    }
 
 
 }
