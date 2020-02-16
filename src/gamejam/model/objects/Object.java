@@ -21,7 +21,6 @@ public abstract class Object implements Movable, Drawable, Updatable {
     private double h;
     private double xVel;
     private double yVel;
-    private Rectangle r;
     private Image image;
 
     public Object() {
@@ -31,7 +30,6 @@ public abstract class Object implements Movable, Drawable, Updatable {
         this.yVel = 0;
         this.h = 1;
         this.w = 1;
-        this.initRect();
         this.image = null;
     }
 
@@ -42,7 +40,6 @@ public abstract class Object implements Movable, Drawable, Updatable {
         this.h = h;
         this.xVel = xVel;
         this.yVel = yVel;
-        this.initRect();
     }
     public Object(double x,double y,double w,double h){
         this.x = x;
@@ -51,13 +48,13 @@ public abstract class Object implements Movable, Drawable, Updatable {
         this.h = h;
         this.xVel = 0;
         this.yVel = 0;
-        this.initRect();
+
     }
 
     // init rectangle
-    private void initRect(){
-        this.r = new Rectangle((int)x,(int)y,(int)w,(int)h);
-    }
+   // private void initRect(){
+    //    this.r = new Rectangle((int)x,(int)y,(int)w,(int)h);
+    //}
 
     /**
      * returns if this object is intersecting another
@@ -65,7 +62,7 @@ public abstract class Object implements Movable, Drawable, Updatable {
      * @return
      */
     public boolean hits(Object o) {
-        return this.r.intersects(o.getX(),o.getY(),o.getW(),o.getH());
+        return new Rectangle(this.x,this.y,this.w,this.h).intersects(o.getX(),o.getY(),o.getW(),o.getH());
     }
 
     protected void move() {
@@ -138,13 +135,13 @@ public abstract class Object implements Movable, Drawable, Updatable {
         this.yVel = yVel;
     }
 
-    public Rectangle getR() {
-        return r;
-    }
-
-    public void setR(Rectangle r) {
-        this.r = r;
-    }
+//    public Rectangle getR() {
+//        return r;
+//    }
+//
+//    public void setR(Rectangle r) {
+//        this.r = r;
+//    }
 
     public void setImage(String i) throws FileNotFoundException {
         this.image = new Image(new FileInputStream(i));
