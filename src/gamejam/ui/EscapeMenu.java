@@ -16,23 +16,23 @@ public class EscapeMenu implements Drawable {
 
     // TODO: PATHS
     private static final String RESUME_BUTTON_PATH =
-            System.getProperty("user.dir") + "/src/gamejam/assets/background_day.png";
+            System.getProperty("user.dir") + "/src/gamejam/assets/RESUME_BUTTON.png";
     private static final String RESTART_BUTTON_PATH =
-            System.getProperty("user.dir") + "/src/gamejam/assets/background_day.png";
+            System.getProperty("user.dir") + "/src/gamejam/assets/RESTART_BUTTON.png";
     private static final String QUIT_BUTTON_PATH =
-            System.getProperty("user.dir") + "/src/gamejam/assets/background_day.png";
+            System.getProperty("user.dir") + "/src/gamejam/assets/QUIT_BUTTON.png";
 
-    private static final double BUTTON_WIDTH = 100;
-    private static final double BUTTON_HEIGHT = 50;
+    private static final double BUTTON_WIDTH = 200;
+    private static final double BUTTON_HEIGHT = 75;
 
     private static final double RESUME_BUTTON_X = Main.CANVAS_WIDTH / 2 - (BUTTON_WIDTH / 2);
-    private static final double RESUME_BUTTON_Y = Main.CANVAS_HEIGHT / 3;
+    private static final double RESUME_BUTTON_Y = Main.CANVAS_HEIGHT / 5;
 
     private static final double RESTART_BUTTON_X = Main.CANVAS_WIDTH / 2 - (BUTTON_WIDTH / 2);
-    private static final double RESTART_BUTTON_Y = Main.CANVAS_HEIGHT / 3 + BUTTON_HEIGHT + 50;
+    private static final double RESTART_BUTTON_Y = Main.CANVAS_HEIGHT / 5 + BUTTON_HEIGHT + 50;
 
     private static final double QUIT_BUTTON_X = Main.CANVAS_WIDTH / 2 - (BUTTON_WIDTH / 2);
-    private static final double QUIT_BUTTON_Y = Main.CANVAS_HEIGHT / 3 + 2 * BUTTON_HEIGHT + 2*50;
+    private static final double QUIT_BUTTON_Y = Main.CANVAS_HEIGHT / 5 + 2 * BUTTON_HEIGHT + 2*50;
 
     private Background background;
 
@@ -51,9 +51,18 @@ public class EscapeMenu implements Drawable {
         this.restartRunnable = restartRunnable;
         this.quitRunnable = quitRunnable;
         this.background = new Background(new FileInputStream(ESCAPE_MENU_BACKGROUND_PATH));
-        this.resumeButtonImage = new Image(new FileInputStream(RESUME_BUTTON_PATH));
-        this.restartButtonImage = new Image(new FileInputStream(RESTART_BUTTON_PATH));
-        this.quitButtonImage = new Image(new FileInputStream(QUIT_BUTTON_PATH));
+        this.resumeButtonImage =
+                new Image(new FileInputStream(RESUME_BUTTON_PATH),
+                        BUTTON_WIDTH, BUTTON_HEIGHT,
+                        false, false);
+        this.restartButtonImage =
+                new Image(new FileInputStream(RESTART_BUTTON_PATH),
+                        BUTTON_WIDTH, BUTTON_HEIGHT,
+                        false, false);
+        this.quitButtonImage =
+                new Image(new FileInputStream(QUIT_BUTTON_PATH),
+                        BUTTON_WIDTH, BUTTON_HEIGHT,
+                        false, false);
     }
 
     @Override
@@ -73,20 +82,17 @@ public class EscapeMenu implements Drawable {
 
     private <T> void drawResumeButton(T ... obj) {
         GraphicsContext gc = (GraphicsContext) obj[0];
-//        gc.drawImage(restartButtonImage, RESUME_BUTTON_X, RESUME_BUTTON_Y);
-        gc.fillRect(RESUME_BUTTON_X, RESUME_BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT);
+        gc.drawImage(resumeButtonImage, RESUME_BUTTON_X, RESUME_BUTTON_Y);
     }
 
     private <T> void drawRestartButton(T ... obj) {
         GraphicsContext gc = (GraphicsContext) obj[0];
-//        gc.drawImage(restartButtonImage, RESTART_BUTTON_X, RESTART_BUTTON_Y);
-        gc.fillRect(RESTART_BUTTON_X, RESTART_BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT);
+        gc.drawImage(restartButtonImage, RESTART_BUTTON_X, RESTART_BUTTON_Y);
     }
 
     private <T> void drawQuitButton(T ... obj) {
         GraphicsContext gc = (GraphicsContext) obj[0];
-//        gc.drawImage(quitButtonImage, QUIT_BUTTON_X, QUIT_BUTTON_Y);
-        gc.fillRect(QUIT_BUTTON_X, QUIT_BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT);
+        gc.drawImage(quitButtonImage, QUIT_BUTTON_X, QUIT_BUTTON_Y);
     }
 
 
