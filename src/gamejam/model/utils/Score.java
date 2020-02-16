@@ -20,7 +20,7 @@ public class Score implements Drawable, Updatable {
     @Override
     public <T> void draw(T... obj) {
         GraphicsContext gc = (GraphicsContext) obj[0];
-        gc.fillText(score+"",(Integer)obj[0],(Integer)obj[1]);
+        gc.fillText("Score: " + score,10,10);
 
     }
 

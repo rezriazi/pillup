@@ -15,10 +15,10 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     public static final int WIDTH = 540;
-    public static final int HEIGHT = 600;
+    public static final int HEIGHT = 630;
 
     public static final int SCENE_WIDTH = 540;
-    public static final int SCENE_HEIGHT = 600;
+    public static final int SCENE_HEIGHT = 630;
 
 
 

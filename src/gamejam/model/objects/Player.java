@@ -113,7 +113,7 @@ public class Player extends Object {
             gc.drawImage(this.action.getCurrentImage(),this.getX(),this.getY(),this.getW(),this.getH());
         }
 
-        score.draw(10,10);
+        score.draw(obj);
 
     }
 
