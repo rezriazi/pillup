@@ -10,14 +10,19 @@ import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class Game implements Drawer, Updatable {
 
     private static final String BACKGROUND_PATH =
+            System.getProperty("user.dir") +
+                    "/src/gamejam/assets/background_day.png";
+    private static final String MP3_PATH =
             System.getProperty("user.dir") +
                     "/src/gamejam/assets/background_day.png";
 
@@ -47,6 +52,9 @@ public class Game implements Drawer, Updatable {
     private AnimationTimer at;
     private State state;
 
+    private Media sound;
+    private MediaPlayer mediaPlayer;
+
     public Game(GraphicsContext gc, Canvas c) throws FileNotFoundException {
         this.background =
                 new Background(new FileInputStream(BACKGROUND_PATH));
@@ -61,6 +69,9 @@ public class Game implements Drawer, Updatable {
         this.gc = gc;
 
         this.state = State.MAIN_MENU;
+
+        this.sound = new Media(new File(MP3_PATH).toURI().toString());
+        this.mediaPlayer = new MediaPlayer(sound);
     }
 
     Player getPlayer() {
@@ -120,6 +131,7 @@ public class Game implements Drawer, Updatable {
             }
         };
         at.start();
+        mediaPlayer.play();
     }
 
     public void setupCanvas() {
