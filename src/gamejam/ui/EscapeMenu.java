@@ -40,11 +40,20 @@ public class EscapeMenu implements Drawable {
     private Background background;
     private Canvas canvas;
 
+    private Runnable resumeRunnable;
+    private Runnable restartRunnable;
+    private Runnable quitRunnable;
+
     private Image resumeButtonImage;
     private Image restartButtonImage;
     private Image quitButtonImage;
 
-    public EscapeMenu(Canvas canvas) throws FileNotFoundException {
+    public EscapeMenu(Canvas canvas, Runnable resumeRunnable,
+                      Runnable restartRunnable,
+                      Runnable quitRunnable) throws FileNotFoundException {
+        this.resumeRunnable = resumeRunnable;
+        this.restartRunnable = restartRunnable;
+        this.quitRunnable = quitRunnable;
         this.background = new Background(new FileInputStream(ESCAPE_MENU_BACKGROUND_PATH));
         this.canvas = canvas;
         this.resumeButtonImage = new Image(new FileInputStream(RESUME_BUTTON_PATH));
@@ -95,10 +104,13 @@ public class EscapeMenu implements Drawable {
 
                 if (isOnResumeButton(mouseX, mouseY)) {
                     // TODO: Resume button is clicked
+                    resumeRunnable.run();
                 } else if (isOnRestartButton(mouseX, mouseY)) {
                     // TODO: Restart button is clicked
+                    restartRunnable.run();
                 } else if (isOnQuitButton(mouseX, mouseY)) {
                     // TODO: Quit button is clicked
+                    quitRunnable.run();
                 }
             }
         });

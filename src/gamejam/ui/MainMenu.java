@@ -35,6 +35,8 @@ public class MainMenu implements Drawable {
 
     private Image playButtonImage;
     private Runnable playRunnable;
+    // TODO:
+    private Runnable settingsRunnable;
 
     private Image settingsButtonImage;
 

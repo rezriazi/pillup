@@ -26,6 +26,7 @@ public class Game implements Drawer, Updatable {
 
     //main menu
     private final MainMenu mainMenu;
+    private final EscapeMenu escapeMenu;
 
     private boolean running = false;
 
@@ -35,7 +36,8 @@ public class Game implements Drawer, Updatable {
     enum State {
         PLAYING,
         LOST,
-        MAIN_MENU
+        MAIN_MENU,
+        ESC_MENU
     }
 
     private AnimationTimer at;
@@ -51,6 +53,23 @@ public class Game implements Drawer, Updatable {
             @Override
             public void run() {
                 state = State.PLAYING;
+            }
+        });
+        this.escapeMenu = new EscapeMenu(this.canvas, new Runnable() {
+            @Override
+            public void run() {
+                state = State.PLAYING;
+            }
+        }, new Runnable() {
+            @Override
+            public void run() {
+                at.stop();
+                state = State.PLAYING;
+            }
+        }, new Runnable() {
+            @Override
+            public void run() {
+                state = State.MAIN_MENU;
             }
         });
         this.gc = gc;
@@ -102,6 +121,9 @@ public class Game implements Drawer, Updatable {
                                 update();
                                 draw();
                                 checkGameOver();
+                                break;
+                            case ESC_MENU:
+                                escapeMenu.draw(gc);
                                 break;
                         }
                         lastUpdate = now;
