@@ -28,7 +28,7 @@ public class Game implements Drawer, Updatable {
 
     private static final String MP3_PATH =
             System.getProperty("user.dir") +
-                    "/src/gamejam/assets/background_day.png";
+                    "/src/gamejam/assets/music.mp3";
 
     private Player player;
     private final Background background;
@@ -83,6 +83,10 @@ public class Game implements Drawer, Updatable {
 
     Player getPlayer() {
         return player;
+    }
+
+    State getState() {
+        return this.state;
     }
 
     @Override

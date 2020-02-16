@@ -38,7 +38,7 @@ public class GameOver implements Drawable {
     private static final double QUIT_BUTTON_X = RESTART_BUTTON_X;
     private static final double QUIT_BUTTON_Y = RESTART_BUTTON_Y + RESTART_BUTTON_H +10;
 
-    private static final double SCORE_BUTTON_X = RESTART_BUTTON_X;
+    private static final double SCORE_BUTTON_X = RESTART_BUTTON_X + 43;
     private static final double SCORE_BUTTON_Y = RESTART_BUTTON_Y - 15;
 
 
@@ -82,7 +82,7 @@ public class GameOver implements Drawable {
     private <T> void drawScore(T... obj) {
         GraphicsContext gc = (GraphicsContext) obj[0];
         gc.setFont(new Font("", 30));
-        gc.fillText("Score: " + (player.getScore()/10),SCORE_BUTTON_X,SCORE_BUTTON_Y);
+        gc.fillText("Score: " + (player.getScore()/55),SCORE_BUTTON_X,SCORE_BUTTON_Y);
     }
 
 
