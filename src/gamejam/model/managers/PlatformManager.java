@@ -5,7 +5,9 @@ import gamejam.model.interfaces.Updatable;
 import gamejam.model.objects.Platform;
 import gamejam.model.objects.Player;
 import gamejam.ui.Main;
+import javafx.scene.image.Image;
 
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -15,6 +17,23 @@ import java.util.Random;
  * if goes out of the screen, gets deleted and a new platform is added with random position
  * */
 public class PlatformManager  implements Updatable, Drawable {
+
+    private static final String BLUE_PILL_PATH =
+            System.getProperty("user.dir") +
+                    "/src/gamejam/assets/bluepill.png";
+
+    private static final String RED_PILL_PATH =
+            System.getProperty("user.dir") +
+                    "/src/gamejam/assets/redpill.png";
+
+    private static final String YELLOW_PILL_PATH =
+            System.getProperty("user.dir") +
+                    "/src/gamejam/assets/yellowpill.png";
+
+    public static Image redImg = null;
+    public static Image blueImg = null;
+    public static Image yellowImg = null;
+
     private Random random = new Random();
     private static final int PLATFORM_COUNT = 7;
     private static final int PLATFORM_HEIGHT = 15;
@@ -31,6 +50,13 @@ public class PlatformManager  implements Updatable, Drawable {
         platformList = new ArrayList<>();
         fillPlatformList();
         this.player = player;
+        try {
+            redImg = new Image(new FileInputStream(RED_PILL_PATH));
+            blueImg = new Image(new FileInputStream(BLUE_PILL_PATH));
+            yellowImg = new Image(new FileInputStream(YELLOW_PILL_PATH));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
