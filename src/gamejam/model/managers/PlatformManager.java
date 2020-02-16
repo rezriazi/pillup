@@ -62,11 +62,11 @@ public class PlatformManager  implements Updatable, Drawable {
     @Override
     public <T> void update(T... obj) {
         for (int i  = 0; i < PLATFORM_COUNT; i++) {
-            Platform currentPlatform1 = platformList.get(i);
-            currentPlatform1.update();
-            if (currentPlatform1.getY() > Main.HEIGHT) {
-                currentPlatform1.setY(-currentPlatform1.getY() % Main.HEIGHT + HEIGHT_OFFSET);
-                currentPlatform1.setX(random.nextInt(Main.WIDTH));
+            Platform currentPlatform = platformList.get(i);
+            currentPlatform.update();
+            if (currentPlatform.getY() > Main.HEIGHT) {
+                currentPlatform.setY(-currentPlatform.getY() % Main.HEIGHT + HEIGHT_OFFSET);
+                currentPlatform.setX(Math.abs(random.nextInt(Main.WIDTH) - currentPlatform.getW()));
             }
         }
 
@@ -85,7 +85,7 @@ public class PlatformManager  implements Updatable, Drawable {
     public boolean playerCollision() {
         for (int i = 0; i < PLATFORM_COUNT; i++) {
             if (platformList.get(i).hits(this.player)) {
-                return true;
+
             }
         }
         return false;

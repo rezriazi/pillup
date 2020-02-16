@@ -16,12 +16,14 @@ public class Player extends Object {
     private static final long X_ANIMATION = 150;
     private static final double PLAYER_HEIGHT = 60;
     private static final double PLAYER_WIDTH = 70;
+    private static final double PLAYER_INIT_X = Main.WIDTH /2 - PLAYER_WIDTH/2;
+    private static final double PLAYER_INIT_Y = Main.HEIGHT - 2 * PLAYER_HEIGHT;
 
     private Animation action;
     private Animation actionX;
 
     public Player(){
-        super(100,300, PLAYER_HEIGHT, PLAYER_WIDTH, 5,-5);
+        super(PLAYER_INIT_X,PLAYER_INIT_Y, PLAYER_HEIGHT, PLAYER_WIDTH, 5,-5);
         action = new Animation(JUMP_ANIMATION);
         actionX = new Animation(X_ANIMATION);
         try {
@@ -57,22 +59,37 @@ public class Player extends Object {
         actionX.update(obj);
         if(action.isInAction()) {
             this.moveY();
-        }else {
+        } else {
             this.moveY(Object.GRAVITY);
         }
 
-        if(actionX.isInAction()){
+        if (actionX.isInAction()) {
             this.moveX();
         }
 
 
-        if(this.getY() + this.getH() >= Main.CANVAS_HEIGHT){
-            this.setY(Main.CANVAS_HEIGHT - this.getH());
+        if (this.getY() + this.getH() >= Main.GROUND){
+            this.setY(Main.GROUND);
         }
     }
 
     // TODO
     public void levelUp() {
+
+    }
+
+    // TODO
+    public void getsFood() {
+
+    }
+
+    // TODO
+    public void dies() {
+
+    }
+
+    // TODO
+    public void getsOld() {
 
     }
 }
