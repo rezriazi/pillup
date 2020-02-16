@@ -4,6 +4,7 @@ import gamejam.model.interfaces.Drawer;
 import gamejam.model.interfaces.Updatable;
 import gamejam.model.managers.PlatformManager;
 import gamejam.model.objects.Player;
+import gamejam.model.utils.Animation;
 import gamejam.model.utils.Background;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
@@ -15,12 +16,17 @@ public class Game implements Drawer, Updatable {
 
     private static final String BACKGROUND_PATH =
             System.getProperty("user.dir") +
-                    "/src/gamejam/assets/backgroundfinal.png";
+                    "/src/gamejam/assets/background.png";
 
     private final Player player;
     private final Background background;
     private final PlatformManager platformManager;
     private final GraphicsContext gc;
+    private AnimationTimer at;
+
+    private enum States { MENU , PLAYING, LOST};
+
+    private States state;
 
     private boolean running = false;
 
@@ -33,6 +39,8 @@ public class Game implements Drawer, Updatable {
         this.player = new Player();
         this.platformManager = new PlatformManager(this.player);
         this.gc = gc;
+        // todo : change playing to menu
+        this.state = States.PLAYING;
     }
 
     Player getPlayer() {
@@ -55,21 +63,36 @@ public class Game implements Drawer, Updatable {
 
     public void start() {
         running = true;
-        new AnimationTimer() {
+        at = new AnimationTimer() {
             private long lastUpdate = 0;
 
             @Override
             public void handle(long now) {
                 if (running) {
                     if ((now - lastUpdate) >= dt) {
-                        gc.clearRect(0, 0, Main.CANVAS_WIDTH, Main.CANVAS_HEIGHT);
-                        update();
-                        draw();
+                        switch (state){
+                            case LOST:
+                                at.stop();
+                                break;
 
-                        lastUpdate = now;
+                            case MENU:
+                                break;
+
+                            case PLAYING:
+                                gc.clearRect(0, 0, Main.CANVAS_WIDTH, Main.CANVAS_HEIGHT);
+                                update();
+                                draw();
+                                if (platformManager.playerCollision()){
+                                    state = States.LOST;
+                                };
+                                lastUpdate = now;
+                                break;
+                        }
                     }
                 }
             }
-        }.start();
+        };
+        at.start();
+
     }
 }
