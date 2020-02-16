@@ -25,7 +25,6 @@ public class Main extends Application {
 
     private Stage window;
     private Scene scene;
-    private Scene gameOver;
     private Canvas canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
     private Pane canvasLayout;
     private GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -48,7 +47,6 @@ public class Main extends Application {
         setupWindow();
         setupCanvas();
         setupScene();
-        setupGameOverScene();
         window.show();
     }
 
@@ -98,11 +96,5 @@ public class Main extends Application {
 
         window.setScene(scene);
     }
-
-    private void setupGameOverScene() {
-        GameOverScene go = GameOverScene.getInstance();
-        this.gameOver = go.getScene();
-    }
-
 
 }
