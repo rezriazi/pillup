@@ -56,7 +56,7 @@ public class Game implements Drawer, Updatable {
         this.mainMenu = new MainMenu(this::startGame);
         this.escapeMenu = new EscapeMenu(this::resume, this::restart, this::quitToMainMenu);
 
-        this.gameOver = new GameOver(this::restart, this::quitToMainMenu);
+        this.gameOver = new GameOver(this::restart, this::quitToMainMenu, this.player);
         this.setupCanvas();
         this.gc = gc;
 
@@ -164,6 +164,7 @@ public class Game implements Drawer, Updatable {
 
     public void startGame(){
         restart();
+        gameOver.setPlayer(this.player);
         state = State.PLAYING;
     }
 

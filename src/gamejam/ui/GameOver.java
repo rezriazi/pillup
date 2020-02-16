@@ -2,10 +2,12 @@ package gamejam.ui;
 
 import com.sun.org.apache.regexp.internal.RE;
 import gamejam.model.interfaces.Drawable;
+import gamejam.model.objects.Player;
 import gamejam.model.utils.Background;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -36,13 +38,19 @@ public class GameOver implements Drawable {
     private static final double QUIT_BUTTON_X = RESTART_BUTTON_X;
     private static final double QUIT_BUTTON_Y = RESTART_BUTTON_Y + RESTART_BUTTON_H +10;
 
+    private static final double SCORE_BUTTON_X = RESTART_BUTTON_X;
+    private static final double SCORE_BUTTON_Y = RESTART_BUTTON_Y - 15;
+
+
 
 
 
     private Image restartButtonImage;
     private Image quitButtonImage;
+    private Image scoreButtonImage;
+    private Player player;
 
-    public GameOver(Runnable r, Runnable q) throws FileNotFoundException {
+    public GameOver(Runnable r, Runnable q, Player p ) throws FileNotFoundException {
         this.background = new Background(new FileInputStream(GAMEOVER_BACKGROUND_PATH));
         this.restartRunnable = r;
         this.quitRunnable = q;
@@ -54,6 +62,8 @@ public class GameOver implements Drawable {
                 new Image(new FileInputStream(QUIT_BUTTON_PATH),
                         QUIT_BUTTON_W, QUIT_BUTTON_H,
                         false, false);
+
+        this.player = p;
     }
 
     @Override
@@ -62,10 +72,17 @@ public class GameOver implements Drawable {
         drawBackground(gc);
         drawRestartButton(gc);
         drawQuitButton(gc);
+        drawScore(gc);
     }
 
     private <T> void drawBackground(T... obj) {
         background.draw(obj);
+    }
+
+    private <T> void drawScore(T... obj) {
+        GraphicsContext gc = (GraphicsContext) obj[0];
+        gc.setFont(new Font("", 30));
+        gc.fillText("Score: " + (player.getScore()/10),SCORE_BUTTON_X,SCORE_BUTTON_Y);
     }
 
 
@@ -101,5 +118,9 @@ public class GameOver implements Drawable {
         }else if (isOnQuitButton(mouseX,mouseY)){
             quitRunnable.run();
         }
+    }
+
+    public void setPlayer(Player p){
+        this.player = p;
     }
 }

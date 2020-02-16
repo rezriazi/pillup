@@ -14,13 +14,15 @@ public class Score implements Drawable, Updatable {
         this.score = 0;
     }
 
+    public int getScore(){ return this.score;}
+
     private void setScore(){
-        this.score = this.score + TIME_CONSTANT;
+        this.score = (this.score + TIME_CONSTANT);
     }
     @Override
     public <T> void draw(T... obj) {
         GraphicsContext gc = (GraphicsContext) obj[0];
-        gc.fillText("Score: " + score,10,10);
+        gc.fillText("Score: " + (score/10),10,10);
 
     }
 

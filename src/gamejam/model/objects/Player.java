@@ -103,6 +103,8 @@ public class Player extends Object {
     }
 
 
+    public int getScore(){return this.score.getScore();}
+
     @Override
     public <T> void draw(T... obj) {
         GraphicsContext gc = (GraphicsContext) obj[0];
