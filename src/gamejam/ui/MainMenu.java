@@ -2,8 +2,11 @@ package gamejam.ui;
 
 import gamejam.model.interfaces.Drawable;
 import gamejam.model.utils.Background;
+import javafx.event.EventHandler;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -22,13 +25,15 @@ public class MainMenu implements Drawable {
     private static final double SETTINGS_BUTTON_RADIUS = 25;
 
     private Background background;
+    private Canvas canvas;
 
-    public MainMenu() throws FileNotFoundException {
+    public MainMenu(Canvas canvas) throws FileNotFoundException {
         this.background = new Background(new FileInputStream(MAIN_MENU_BACKGROUND_PATH));
+        this.canvas = canvas;
     }
 
     @Override
-    public <T> void draw(T... obj) {
+    public <T> void draw(T ... obj) {
         GraphicsContext gc = (GraphicsContext) obj[0];
 
         drawBackground(gc);
@@ -56,5 +61,29 @@ public class MainMenu implements Drawable {
         gc.drawImage(new Image(new FileInputStream(SETTINGS_BUTTON_PATH)),
                 0 + SETTINGS_BUTTON_RADIUS,
                 0 + SETTINGS_BUTTON_RADIUS);
+    }
+
+    public void setupCanvas() {
+        canvas.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                double mouseX = event.getSceneX();
+                double mouseY = event.getSceneY();
+
+                if (isOnPlayButton(mouseX, mouseY)) {
+                    // Play button is clicked
+                } else if (isOnSettingsButton(mouseX, mouseY)) {
+                    // Settings button is clicked
+                }
+            }
+        });
+    }
+
+    private boolean isOnPlayButton(double mX, double mY) {
+        return false;
+    }
+
+    private boolean isOnSettingsButton(double mX, double mY) {
+        return false;
     }
 }
