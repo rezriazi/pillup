@@ -2,13 +2,12 @@ package gamejam.model.managers;
 
 import gamejam.model.interfaces.Drawable;
 import gamejam.model.interfaces.Updatable;
-import gamejam.model.objects.Obstacle;
-import gamejam.model.objects.Platform;
+import gamejam.model.objects.Item;
 
 import java.util.ArrayList;
 
 public class ObstacleManager implements Updatable, Drawable {
-    private ArrayList<Obstacle> obstacleList;
+    private ArrayList<Item> obstacleList;
     //private final PlatformManager PM;
     private static final int OBSTACLE_COUNT = 7;
 
