@@ -2,14 +2,9 @@ package gamejam.ui;
 
 import gamejam.model.interfaces.Drawable;
 import gamejam.model.utils.Background;
-import javafx.event.EventHandler;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -17,7 +12,7 @@ import java.io.FileNotFoundException;
 public class MainMenu implements Drawable {
 
     private static final String MAIN_MENU_BACKGROUND_PATH =
-            System.getProperty("user.dir") + "/src/gamejam/assets/mainscreen.png";
+            System.getProperty("user.dir") + "/src/gamejam/assets/mainscreen2.jpg";
     // TODO: play_button & settings_button
     private static final String PLAY_BUTTON_PATH =
             System.getProperty("user.dir") + "/src/gamejam/assets/background_day.png";
