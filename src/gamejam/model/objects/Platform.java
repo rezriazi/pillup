@@ -4,6 +4,8 @@ import gamejam.model.interfaces.Drawable;
 import gamejam.model.interfaces.Updatable;
 import javafx.scene.canvas.GraphicsContext;
 
+import java.util.Random;
+
 public class Platform extends Object implements Updatable, Drawable {
     enum types {
         FLAME_SHIELD,
@@ -11,8 +13,10 @@ public class Platform extends Object implements Updatable, Drawable {
         FLOAT,
     }
 
+    private types type;
     public Platform(double x, double y, double w, double h, double yVel) {
         super(x, y, w, h, 0, yVel);
+        changeType();
     }
 
     @Override
@@ -34,6 +38,11 @@ public class Platform extends Object implements Updatable, Drawable {
     @Override
     public <T> void update(T... obj) {
         move(obj);
+    }
+
+    public void changeType() {
+        Random random = new Random();
+        this.type = types.values()[random.nextInt(Item.types.values().length)];
     }
 
 }
