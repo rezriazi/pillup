@@ -10,10 +10,9 @@ import java.io.FileNotFoundException;
 
 public class MainMenu implements Drawable {
 
-    // TODO: main_menu_background, play_button & settings_button
     private static final String MAIN_MENU_BACKGROUND_PATH =
-            System.getProperty("user.dir") + "/src/gamejam/assets/background_day.png";
-
+            System.getProperty("user.dir") + "/src/gamejam/assets/mainscreen.png";
+    // TODO: play_button & settings_button
     private static final String PLAY_BUTTON_PATH =
             System.getProperty("user.dir") + "/src/gamejam/assets/background_day.png";
     private static final String SETTINGS_BUTTON_PATH =
