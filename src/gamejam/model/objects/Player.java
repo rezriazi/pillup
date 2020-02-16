@@ -1,5 +1,6 @@
 package gamejam.model.objects;
 
+import gamejam.model.managers.PlatformManager;
 import gamejam.model.utils.Animation;
 import gamejam.model.utils.Arrow;
 import gamejam.ui.Main;
@@ -19,7 +20,6 @@ public class Player extends Object {
     private static final long X_ANIMATION = 150;
     private static final double PLAYER_HEIGHT = 60;
     private static final double PLAYER_WIDTH = 70;
-
 
     private Animation action;
     private Animation actionX;
@@ -47,7 +47,6 @@ public class Player extends Object {
 
     @Override
     public <T> void move(T... obj) {
-        // TODO
         Arrow arrow = (Arrow) obj[0];
         this.setxVel(Math.abs(this.getxVel()) * arrow.getValue());
         actionX.start();
@@ -61,6 +60,7 @@ public class Player extends Object {
 
     @Override
     public <T> void update(T... obj) {
+
         action.update(obj);
         actionX.update(obj);
         if(action.isInAction()) {
@@ -72,7 +72,6 @@ public class Player extends Object {
         if(actionX.isInAction()){
             this.moveX();
         }
-
 
 
         if(this.getY() + this.getH() >= Main.CANVAS_HEIGHT){

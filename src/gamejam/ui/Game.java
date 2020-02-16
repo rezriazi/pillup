@@ -31,7 +31,7 @@ public class Game implements Drawer, Updatable {
         this.background =
                 new Background(new FileInputStream(BACKGROUND_PATH));
         this.player = new Player();
-        this.platformManager = new PlatformManager();
+        this.platformManager = new PlatformManager(this.player);
         this.gc = gc;
     }
 

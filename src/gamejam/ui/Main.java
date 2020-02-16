@@ -23,7 +23,7 @@ public class Main extends Application {
     public static final int CANVAS_WIDTH = SCENE_WIDTH;
     public static final int CANVAS_HEIGHT = SCENE_HEIGHT;
 
-    private Stage window;
+    private static Stage window;
     private Scene scene;
     private Canvas canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
     private Pane canvasLayout;
@@ -96,5 +96,9 @@ public class Main extends Application {
             });
 
         window.setScene(scene);
+    }
+
+    public static void setScene(Scene scene) {
+        this.window.setScene(scene);
     }
 }

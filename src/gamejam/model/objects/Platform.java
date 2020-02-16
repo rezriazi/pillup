@@ -37,4 +37,5 @@ public class Platform extends Object implements Updatable, Drawable {
     public void changeObstacleType() {
         this.obstacle.changeType();
     }
+
 }

@@ -3,6 +3,7 @@ package gamejam.model.managers;
 import gamejam.model.interfaces.Drawable;
 import gamejam.model.interfaces.Updatable;
 import gamejam.model.objects.Platform;
+import gamejam.model.objects.Player;
 import gamejam.ui.Main;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.Random;
  * */
 public class PlatformManager  implements Updatable, Drawable {
     private Random random = new Random();
-    private static final int PLATFORM_COUNT = 10;
+    private static final int PLATFORM_COUNT = 7;
     private static final int PLATFORM_HEIGHT = 15;
     private static final int MIN_PLATFORM_WIDTH = 30;
     private static final int PLATFORM_WIDTH_INTERVAL = 50;
@@ -23,11 +24,13 @@ public class PlatformManager  implements Updatable, Drawable {
     private static final int HEIGHT_OFFSET = -20;
 
     private ArrayList<Platform> platformList;
+    private Player player;
 
     // constructor
-    public PlatformManager() {
+    public PlatformManager(Player player) {
         platformList = new ArrayList<>();
         fillPlatformList();
+        this.player = player;
     }
 
     /**
@@ -65,17 +68,27 @@ public class PlatformManager  implements Updatable, Drawable {
                 currentPlatform1.setY(-currentPlatform1.getY() % Main.HEIGHT + HEIGHT_OFFSET);
                 currentPlatform1.setX(random.nextInt(Main.WIDTH));
             }
-
         }
+
+        playerCollision();
     }
 
     @Override
     public <T> void draw(T... obj) {
         for (int i  = 0; i < PLATFORM_COUNT; i++) {
             Platform currentPlatform = platformList.get(i);
-            //Platform currentPlatform2 = platformList2.get(i);
             currentPlatform.draw(obj);
-            //currentPlatform2.draw(obj);
         }
+    }
+
+    //TODO
+    public boolean playerCollision() {
+        for (int i = 0; i < PLATFORM_COUNT; i++) {
+            if (platformList.get(i).hits(this.player)) {
+                System.out.println("Player Hit");
+                return true;
+            }
+        }
+        return false;
     }
 }
