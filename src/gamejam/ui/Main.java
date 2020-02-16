@@ -17,8 +17,8 @@ public class Main extends Application {
     public static final int WIDTH = 540;
     public static final int HEIGHT = 600;
 
-    public static final int SCENE_WIDTH = 530;
-    public static final int SCENE_HEIGHT = 590;
+    public static final int SCENE_WIDTH = 540;
+    public static final int SCENE_HEIGHT = 600;
 
     public static final int CANVAS_WIDTH = SCENE_WIDTH;
     public static final int CANVAS_HEIGHT = SCENE_HEIGHT;

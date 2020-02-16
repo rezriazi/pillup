@@ -15,7 +15,7 @@ public class Game implements Drawer, Updatable {
 
     private static final String BACKGROUND_PATH =
             System.getProperty("user.dir") +
-                    "/src/gamejam/assets/backgroundfinal.png";
+                    "/src/gamejam/assets/background_final_2.png";
 
     private final Player player;
     private final Background background;
