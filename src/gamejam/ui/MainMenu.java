@@ -21,8 +21,13 @@ public class MainMenu implements Drawable {
     private static final String SETTINGS_BUTTON_PATH =
             System.getProperty("user.dir") + "/src/gamejam/assets/background_day.png";
 
+    private static final double PLAY_BUTTON_X = Main.CANVAS_WIDTH / 2;
+    private static final double PLAY_BUTTON_Y = 2 * Main.CANVAS_HEIGHT / 3;
     private static final double PLAY_BUTTON_RADIUS = 50;
-    private static final double SETTINGS_BUTTON_RADIUS = 25;
+
+    private static final double SETTINGS_BUTTON_X = PLAY_BUTTON_X;
+    private static final double SETTINGS_BUTTON_Y = PLAY_BUTTON_Y + PLAY_BUTTON_RADIUS + 10;
+    private static final double SETTINGS_BUTTON_RADIUS = 50;
 
     private Background background;
     private Canvas canvas;
@@ -30,6 +35,7 @@ public class MainMenu implements Drawable {
     public MainMenu(Canvas canvas) throws FileNotFoundException {
         this.background = new Background(new FileInputStream(MAIN_MENU_BACKGROUND_PATH));
         this.canvas = canvas;
+        setupCanvas();
     }
 
     @Override
@@ -52,15 +58,13 @@ public class MainMenu implements Drawable {
     private <T> void drawPlayButton(T ... obj) throws FileNotFoundException {
         GraphicsContext gc = (GraphicsContext) obj[0];
         gc.drawImage(new Image(new FileInputStream(PLAY_BUTTON_PATH)),
-                Main.CANVAS_WIDTH / 2 - PLAY_BUTTON_RADIUS,
-                Main.CANVAS_HEIGHT / 2 - PLAY_BUTTON_RADIUS);
+                PLAY_BUTTON_X, PLAY_BUTTON_Y);
     }
 
     private <T> void drawSettingsButton(T ... obj) throws FileNotFoundException {
         GraphicsContext gc = (GraphicsContext) obj[0];
         gc.drawImage(new Image(new FileInputStream(SETTINGS_BUTTON_PATH)),
-                0 + SETTINGS_BUTTON_RADIUS,
-                0 + SETTINGS_BUTTON_RADIUS);
+                SETTINGS_BUTTON_X, SETTINGS_BUTTON_Y);
     }
 
     public void setupCanvas() {
@@ -71,19 +75,25 @@ public class MainMenu implements Drawable {
                 double mouseY = event.getSceneY();
 
                 if (isOnPlayButton(mouseX, mouseY)) {
-                    // Play button is clicked
+                    // TODO: Play button is clicked
                 } else if (isOnSettingsButton(mouseX, mouseY)) {
-                    // Settings button is clicked
+                    // TODO: Settings button is clicked
                 }
             }
         });
     }
 
     private boolean isOnPlayButton(double mX, double mY) {
-        return false;
+        return (mX >= PLAY_BUTTON_X - PLAY_BUTTON_RADIUS
+                && mX <= PLAY_BUTTON_X + PLAY_BUTTON_RADIUS)
+                    && (mY >= PLAY_BUTTON_Y - PLAY_BUTTON_RADIUS
+                        && mY <= PLAY_BUTTON_Y + PLAY_BUTTON_RADIUS);
     }
 
     private boolean isOnSettingsButton(double mX, double mY) {
-        return false;
+        return (mX >= SETTINGS_BUTTON_X - SETTINGS_BUTTON_RADIUS
+                && mX <= SETTINGS_BUTTON_X + SETTINGS_BUTTON_RADIUS)
+                    && (mY >= SETTINGS_BUTTON_Y - SETTINGS_BUTTON_RADIUS
+                        && mY <= SETTINGS_BUTTON_Y + SETTINGS_BUTTON_RADIUS);
     }
 }
