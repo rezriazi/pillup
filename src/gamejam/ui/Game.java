@@ -47,7 +47,12 @@ public class Game implements Drawer, Updatable {
         this.player = new Player();
         this.platformManager = new PlatformManager(this.player);
         this.canvas  = c;
-        this.mainMenu = new MainMenu(this.canvas);
+        this.mainMenu = new MainMenu(this.canvas, new Runnable() {
+            @Override
+            public void run() {
+                state = State.PLAYING;
+            }
+        });
         this.gc = gc;
 
         this.state = State.MAIN_MENU;

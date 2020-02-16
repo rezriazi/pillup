@@ -26,16 +26,20 @@ public class MainMenu implements Drawable {
     private static final double PLAY_BUTTON_RADIUS = 50;
 
     private static final double SETTINGS_BUTTON_X = PLAY_BUTTON_X;
-    private static final double SETTINGS_BUTTON_Y = PLAY_BUTTON_Y + PLAY_BUTTON_RADIUS + 10;
     private static final double SETTINGS_BUTTON_RADIUS = 50;
+    private static final double SETTINGS_BUTTON_Y = PLAY_BUTTON_Y + PLAY_BUTTON_RADIUS + 10 + SETTINGS_BUTTON_RADIUS;
+
 
     private Background background;
     private Canvas canvas;
 
     private Image playButtonImage;
+    private Runnable playRunnable;
+
     private Image settingsButtonImage;
 
-    public MainMenu(Canvas canvas) throws FileNotFoundException {
+    public MainMenu(Canvas canvas,Runnable playRunnable) throws FileNotFoundException {
+        this.playRunnable = playRunnable;
         this.background = new Background(new FileInputStream(MAIN_MENU_BACKGROUND_PATH));
         this.canvas = canvas;
         this.playButtonImage = new Image(new FileInputStream(PLAY_BUTTON_PATH));
@@ -79,6 +83,8 @@ public class MainMenu implements Drawable {
 
                 if (isOnPlayButton(mouseX, mouseY)) {
                     // TODO: Play button is clicked
+                    System.out.println("play clicked");
+                    playRunnable.run();
                 } else if (isOnSettingsButton(mouseX, mouseY)) {
                     // TODO: Settings button is clicked
                 }
