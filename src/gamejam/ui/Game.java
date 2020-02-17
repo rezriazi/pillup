@@ -146,7 +146,7 @@ public class Game implements Drawer, Updatable {
             }
         };
         at.start();
-       // mediaPlayer.play();
+        mediaPlayer.play();
     }
 
     public void setupCanvas() {
