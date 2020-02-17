@@ -30,9 +30,14 @@ public class PlatformManager  implements Updatable, Drawable {
             System.getProperty("user.dir") +
                     "/src/gamejam/assets/yellownewpill.png";
 
+    private static final String SPIKE_PATH =
+            System.getProperty("user.dir") +
+                    "/src/gamejam/assets/spike.png";
+
     public static Image redImg = null;
     public static Image blueImg = null;
     public static Image yellowImg = null;
+    public static Image spikeImg = null;
 
     private Random random = new Random();
     private static final int PLATFORM_COUNT = 7;
@@ -54,6 +59,7 @@ public class PlatformManager  implements Updatable, Drawable {
             redImg = new Image(new FileInputStream(RED_PILL_PATH));
             blueImg = new Image(new FileInputStream(BLUE_PILL_PATH));
             yellowImg = new Image(new FileInputStream(YELLOW_PILL_PATH));
+            spikeImg = new Image(new FileInputStream(SPIKE_PATH));
         } catch (Exception e) {
             e.printStackTrace();
         }

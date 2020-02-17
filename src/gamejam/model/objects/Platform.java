@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class Platform extends Object implements Updatable, Drawable {
 
-    private static final int PILL_WIDTH = 50;
+    private static final int PILL_WIDTH = 40;
     private static final int PILL_HEIGHT = 20;
 
     private static final int OVERALL_ODDS = 10;
@@ -49,7 +49,7 @@ public class Platform extends Object implements Updatable, Drawable {
         // get the gc and draw the image at its position
         GraphicsContext gc = (GraphicsContext) obj[0];
         if (this.type == types.SPIKE) {
-            gc.fillRect(getX(),getY(),getW(),getH());
+            gc.drawImage(PlatformManager.spikeImg,getX(),getY(),getW(),getH());
         } else {
             switch (this.pillColor){
                 case RED:

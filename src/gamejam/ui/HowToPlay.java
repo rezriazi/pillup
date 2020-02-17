@@ -65,7 +65,7 @@ public class HowToPlay implements Drawable {
         GraphicsContext gc = (GraphicsContext) obj[0];
         background.draw(obj);
         gc.drawImage(this.back,BACK_X,BACK_Y);
-        drawPlayButton(obj);
+        //drawPlayButton(obj);
 
     }
 
@@ -78,10 +78,11 @@ public class HowToPlay implements Drawable {
         }
 
     }
-    private <T> void drawPlayButton(T ... obj){
-        GraphicsContext gc = (GraphicsContext) obj[0];
-        gc.drawImage(playButtonImage, PLAY_BUTTON_X, PLAY_BUTTON_Y);
-    }
+//    private <T> void drawPlayButton(T ... obj){
+//        GraphicsContext gc = (GraphicsContext) obj[0];
+//        gc.fillText("Click ");
+//        //gc.drawImage(playButtonImage, PLAY_BUTTON_X, PLAY_BUTTON_Y);
+//    }
 
     public boolean isAlreadyShown(){
         return this.alreadyShown;
