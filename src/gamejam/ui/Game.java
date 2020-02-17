@@ -22,6 +22,10 @@ public class Game implements Drawer, Updatable {
     private static final String BACKGROUND_PATH =
             System.getProperty("user.dir") +
                     "/src/gamejam/assets/background_day.png";
+
+
+
+
     private static final String MP3_PATH =
             System.getProperty("user.dir") +
                     "/src/gamejam/assets/music.mp3";
@@ -35,7 +39,8 @@ public class Game implements Drawer, Updatable {
     //main menu
     private final MainMenu mainMenu;
     private final EscapeMenu escapeMenu;
-    private final GameOver gameOver;
+    private GameOver gameOver;
+    private final HowToPlay howToPlay;
 
     private boolean running = false;
 
@@ -46,7 +51,8 @@ public class Game implements Drawer, Updatable {
         PLAYING,
         LOST,
         MAIN_MENU,
-        ESC_MENU
+        ESC_MENU,
+        HTP
     }
 
     private AnimationTimer at;
@@ -67,11 +73,12 @@ public class Game implements Drawer, Updatable {
         this.gameOver = new GameOver(this::restart, this::quitToMainMenu, this.player);
         this.setupCanvas();
         this.gc = gc;
+        this.howToPlay = new HowToPlay(this::startGame,this::quitToMainMenu);
 
         this.state = State.MAIN_MENU;
 
-        this.sound = new Media(new File(MP3_PATH).toURI().toString());
-        this.mediaPlayer = new MediaPlayer(sound);
+//        this.sound = new Media(new File(MP3_PATH).toURI().toString());
+//        this.mediaPlayer = new MediaPlayer(sound);
     }
 
     Player getPlayer() {
@@ -128,6 +135,9 @@ public class Game implements Drawer, Updatable {
                             case ESC_MENU:
                                 escapeMenu.draw(gc);
                                 break;
+                            case HTP:
+                                howToPlay.draw(gc);
+                                break;
                         }
                         lastUpdate = now;
                     }
@@ -135,7 +145,7 @@ public class Game implements Drawer, Updatable {
             }
         };
         at.start();
-        mediaPlayer.play();
+       // mediaPlayer.play();
     }
 
     public void setupCanvas() {
@@ -150,6 +160,8 @@ public class Game implements Drawer, Updatable {
                     escapeMenu.onClick(mouseX,mouseY);
                 }else if(state == State.LOST){
                     gameOver.onClick(mouseX,mouseY);
+                }else if(state == State.HTP){
+                    howToPlay.onClick(mouseX,mouseY);
                 }
 
 
@@ -171,7 +183,13 @@ public class Game implements Drawer, Updatable {
     public void restart(){
         this.player = new Player();
         this.platformManager = new PlatformManager(this.player);
+        try {
+            this.gameOver = new GameOver(this::restart, this::quitToMainMenu, this.player);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         state = State.PLAYING;
+
     }
 
     public void resume() {
@@ -179,9 +197,14 @@ public class Game implements Drawer, Updatable {
     }
 
     public void startGame(){
-        restart();
-        gameOver.setPlayer(this.player);
-        state = State.PLAYING;
+        if(howToPlay.isAlreadyShown()){
+            restart();
+//            gameOver.setPlayer(this.player);
+            state = State.PLAYING;
+        }else{
+            state = State.HTP;
+        }
+
     }
 
 
