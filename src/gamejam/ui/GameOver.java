@@ -82,7 +82,8 @@ public class GameOver implements Drawable {
     private <T> void drawScore(T... obj) {
         GraphicsContext gc = (GraphicsContext) obj[0];
         gc.setFont(new Font("", 30));
-        gc.fillText("Score: " + (player.getScore()/55),SCORE_BUTTON_X,SCORE_BUTTON_Y);
+        gc.fillText("Score: " + (player.getScore()/55),SCORE_BUTTON_X-100,SCORE_BUTTON_Y);
+        gc.fillText("High Score: " + (player.updateHighScore()/55),SCORE_BUTTON_X + 70,SCORE_BUTTON_Y);
     }
 
 

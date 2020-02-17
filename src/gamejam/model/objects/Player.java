@@ -165,7 +165,7 @@ public class Player extends Object {
         try {
             String val = ReadWrite.readFile(FILE_NAME);
             if(!val.isEmpty()){
-                int v = Integer.parseInt(val);
+                int v = Integer.parseInt(val.trim());
                 if(this.score.getScore()>v){
                     ReadWrite.saveFile(this.score.getScore()+"",FILE_NAME);
                     return this.score.getScore();
@@ -177,7 +177,12 @@ public class Player extends Object {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            try {
+                ReadWrite.saveFile(this.score.getScore()+"",FILE_NAME);
+            } catch (IOException ex) {
+
+            }
+            //e.printStackTrace();
         }
         return 0;
     }
