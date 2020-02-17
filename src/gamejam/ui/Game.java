@@ -70,7 +70,7 @@ public class Game implements Drawer, Updatable {
         this.platformManager = new PlatformManager(this.player);
         this.canvas  = c;
         this.mainMenu = new MainMenu(this::startGame,mediaPlayer);
-        this.escapeMenu = new EscapeMenu(this::resume, this::restart, this::quitToMainMenu);
+        this.escapeMenu = new EscapeMenu(this::resume, this::restart, this::quitToMainMenu, mediaPlayer);
 
         this.gameOver = new GameOver(this::restart, this::quitToMainMenu, this.player);
         this.setupCanvas();
