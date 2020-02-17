@@ -87,10 +87,13 @@ public class Main extends Application {
                         player.jump(Arrow.UP);
                         break;
                     case SPACE:
-                        player.jump(Arrow.SPACE);
-                        break;
                     case ESCAPE:
-                        game.openEscapeMenu();
+                        //player.jump(Arrow.SPACE);
+                        if(game.getState()== Game.State.PLAYING){
+                            game.openEscapeMenu();
+                        }else if (game.getState()== Game.State.ESC_MENU){
+                            game.resume();
+                        }
                         break;
                     default:
                         break;
@@ -99,33 +102,33 @@ public class Main extends Application {
             });
 
 
-        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                KeyCode keyCode = event.getCode();
-                Player player = game.getPlayer();
-
-                switch (keyCode) {
-                    case LEFT:
-                        player.move(Arrow.LEFT);
-                        break;
-                    case RIGHT:
-                        player.move(Arrow.RIGHT);
-                        break;
-                    case UP:
-                        player.jump(Arrow.UP);
-                        break;
-                    case SPACE:
-                        player.jump(Arrow.SPACE);
-                        break;
-                    case ESCAPE:
-                        game.openEscapeMenu();
-                        break;
-                    default:
-                        break;
-                }
-            }
-        });
+//        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+//            @Override
+//            public void handle(KeyEvent event) {
+//                KeyCode keyCode = event.getCode();
+//                Player player = game.getPlayer();
+//
+//                switch (keyCode) {
+//                    case LEFT:
+//                        player.move(Arrow.LEFT);
+//                        break;
+//                    case RIGHT:
+//                        player.move(Arrow.RIGHT);
+//                        break;
+//                    case UP:
+//                        player.jump(Arrow.UP);
+//                        break;
+//                    case SPACE:
+//                        player.jump(Arrow.SPACE);
+//                        break;
+//                    case ESCAPE:
+//                        game.openEscapeMenu();
+//                        break;
+//                    default:
+//                        break;
+//                }
+//            }
+//        });
 
         window.setScene(scene);
     }
