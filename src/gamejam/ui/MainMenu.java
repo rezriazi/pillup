@@ -88,7 +88,7 @@ public class MainMenu implements Drawable {
             if (this.mediaPlayer.isMute()) {
                 this.mediaPlayer.setMute(false);
                 gc.drawImage(settingsButtonImage, SETTINGS_BUTTON_X, SETTINGS_BUTTON_Y);
-            } else{
+            } else {
                 this.mediaPlayer.setMute(true);
                 gc.drawImage(muteButtonImage, SETTINGS_BUTTON_X, SETTINGS_BUTTON_Y);
             }
