@@ -4,6 +4,7 @@ import gamejam.model.interfaces.Drawable;
 import gamejam.model.utils.Background;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.media.MediaPlayer;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -21,6 +22,15 @@ public class EscapeMenu implements Drawable {
             System.getProperty("user.dir") + "/src/gamejam/assets/RESTARTBUTTON.png";
     private static final String QUIT_BUTTON_PATH =
             System.getProperty("user.dir") + "/src/gamejam/assets/QUITBUTTON.png";
+
+    private static final String MUSIC_BUTTON_PATH =
+            System.getProperty("user.dir") + "/src/gamejam/assets/note.png";
+
+    private static final String MUTE_BUTTON_PATH =
+            System.getProperty("user.dir") + "/src/gamejam/assets/note_not.png";
+
+    private static final double MUSIC_BUTTON_X = 18;
+    private static final double MUSIC_BUTTON_Y = Main.CANVAS_HEIGHT - 103;
 
     private static final double BUTTON_WIDTH = 200;
     private static final double BUTTON_HEIGHT = 75;
@@ -44,9 +54,14 @@ public class EscapeMenu implements Drawable {
     private Image restartButtonImage;
     private Image quitButtonImage;
 
+    private Image musicButtonImage;
+    private Image muteButtonImage;
+
+    private MediaPlayer mediaPlayer;
+
     public EscapeMenu(Runnable resumeRunnable,
                       Runnable restartRunnable,
-                      Runnable quitRunnable) throws FileNotFoundException {
+                      Runnable quitRunnable, MediaPlayer mediaPlayer) throws FileNotFoundException {
         this.resumeRunnable = resumeRunnable;
         this.restartRunnable = restartRunnable;
         this.quitRunnable = quitRunnable;
@@ -63,6 +78,18 @@ public class EscapeMenu implements Drawable {
                 new Image(new FileInputStream(QUIT_BUTTON_PATH),
                         BUTTON_WIDTH, BUTTON_HEIGHT,
                         false, false);
+
+        this.musicButtonImage =
+                new Image(new FileInputStream(MUSIC_BUTTON_PATH),
+                        50, 50,
+                        false, false);
+
+        this.muteButtonImage =
+                new Image(new FileInputStream(MUTE_BUTTON_PATH),
+                        50, 50,
+                        false, false);
+
+        this.mediaPlayer = mediaPlayer;
     }
 
     @Override
@@ -73,6 +100,12 @@ public class EscapeMenu implements Drawable {
         drawResumeButton(gc);
         drawRestartButton(gc);
         drawQuitButton(gc);
+
+        if (mediaPlayer.isMute()) {
+            gc.drawImage(muteButtonImage, MUSIC_BUTTON_X, MUSIC_BUTTON_Y);
+        } else {
+            gc.drawImage(musicButtonImage, MUSIC_BUTTON_X, MUSIC_BUTTON_Y);
+        }
 
     }
 
@@ -106,6 +139,12 @@ public class EscapeMenu implements Drawable {
         } else if (isOnQuitButton(mouseX, mouseY)) {
             // TODO: Quit button is clicked
             quitRunnable.run();
+        } else if (isOnMusicButton(mouseX, mouseY)) {
+            if (this.mediaPlayer.isMute()) {
+                this.mediaPlayer.setMute(false);
+            } else {
+                this.mediaPlayer.setMute(true);
+            }
         }
     }
 
@@ -122,5 +161,10 @@ public class EscapeMenu implements Drawable {
     private boolean isOnQuitButton(double mX, double mY) {
         return (mX >= QUIT_BUTTON_X && mX <= QUIT_BUTTON_X + quitButtonImage.getWidth())
                 && (mY >= QUIT_BUTTON_Y && mY <= QUIT_BUTTON_Y + quitButtonImage.getHeight());
+    }
+
+    private boolean isOnMusicButton(double mX, double mY) {
+        return (mX >= MUSIC_BUTTON_X && mX <= MUSIC_BUTTON_X + musicButtonImage.getWidth())
+                && (mY >= MUSIC_BUTTON_Y && mY <= MUSIC_BUTTON_Y + musicButtonImage.getHeight());
     }
 }
