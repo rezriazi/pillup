@@ -4,11 +4,16 @@ import gamejam.model.utils.Animation;
 import gamejam.model.utils.Arrow;
 import gamejam.model.utils.Score;
 import gamejam.ui.Main;
+import gamejam.ui.ReadWrite;
 import javafx.scene.canvas.GraphicsContext;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Player extends Object {
+
+    private static final String FILE_NAME = "high_score_pill_up";
+
     private static final String LITTLE_BOY_PATH =
             System.getProperty("user.dir") +
                     "/src/gamejam/assets/littleboy1!.png";
@@ -153,6 +158,28 @@ public class Player extends Object {
         this.inBound();
         score.update();
 
+    }
+
+
+    public int updateHighScore() {
+        try {
+            String val = ReadWrite.readFile(FILE_NAME);
+            if(!val.isEmpty()){
+                int v = Integer.parseInt(val);
+                if(this.score.getScore()>v){
+                    ReadWrite.saveFile(this.score.getScore()+"",FILE_NAME);
+                    return this.score.getScore();
+                }
+                return v;
+            }else{
+                ReadWrite.saveFile(this.score.getScore()+"",FILE_NAME);
+                return this.score.getScore();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
 
