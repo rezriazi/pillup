@@ -62,12 +62,14 @@ public class Game implements Drawer, Updatable {
     private MediaPlayer mediaPlayer;
 
     public Game(GraphicsContext gc, Canvas c) throws FileNotFoundException {
+        this.sound = new Media(new File(MP3_PATH).toURI().toString());
+        this.mediaPlayer = new MediaPlayer(sound);
         this.background =
                 new Background(new FileInputStream(BACKGROUND_PATH));
         this.player = new Player();
         this.platformManager = new PlatformManager(this.player);
         this.canvas  = c;
-        this.mainMenu = new MainMenu(this::startGame);
+        this.mainMenu = new MainMenu(this::startGame,mediaPlayer);
         this.escapeMenu = new EscapeMenu(this::resume, this::restart, this::quitToMainMenu);
 
         this.gameOver = new GameOver(this::restart, this::quitToMainMenu, this.player);
@@ -77,8 +79,7 @@ public class Game implements Drawer, Updatable {
 
         this.state = State.MAIN_MENU;
 
-//        this.sound = new Media(new File(MP3_PATH).toURI().toString());
-//        this.mediaPlayer = new MediaPlayer(sound);
+
     }
 
     Player getPlayer() {
@@ -155,7 +156,7 @@ public class Game implements Drawer, Updatable {
                 double mouseX = event.getSceneX();
                 double mouseY = event.getSceneY();
                 if(state == State.MAIN_MENU ) {
-                    mainMenu.onClick(mouseX,mouseY);
+                    mainMenu.onClick(mouseX,mouseY,gc);
                 }else if(state == State.ESC_MENU){
                     escapeMenu.onClick(mouseX,mouseY);
                 }else if(state == State.LOST){
