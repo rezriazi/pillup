@@ -24,7 +24,7 @@ public class Game implements Drawer, Updatable {
                     "/src/gamejam/assets/background_day.png";
     private static final String MP3_PATH =
             System.getProperty("user.dir") +
-                    "/src/gamejam/assets/background_day.png";
+                    "/src/gamejam/assets/music.mp3";
 
     private Player player;
     private final Background background;
@@ -70,8 +70,8 @@ public class Game implements Drawer, Updatable {
 
         this.state = State.MAIN_MENU;
 
-      //  this.sound = new Media(new File(MP3_PATH).toURI().toString());
-       // this.mediaPlayer = new MediaPlayer(sound);
+        this.sound = new Media(new File(MP3_PATH).toURI().toString());
+        this.mediaPlayer = new MediaPlayer(sound);
     }
 
     Player getPlayer() {
@@ -131,7 +131,7 @@ public class Game implements Drawer, Updatable {
             }
         };
         at.start();
-//        mediaPlayer.play();
+        mediaPlayer.play();
     }
 
     public void setupCanvas() {
