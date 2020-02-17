@@ -64,6 +64,11 @@ public class MainMenu implements Drawable {
         GraphicsContext gc = (GraphicsContext) obj[0];
         drawBackground(gc);
         drawSettingsButton(gc);drawPlayButton(gc);
+        if(this.mediaPlayer.isMute()){
+            gc.drawImage(muteButtonImage, SETTINGS_BUTTON_X, SETTINGS_BUTTON_Y);
+        }else{
+            gc.drawImage(settingsButtonImage, SETTINGS_BUTTON_X, SETTINGS_BUTTON_Y);
+        }
     }
 
     private <T> void drawBackground(T ... obj) {
@@ -87,10 +92,8 @@ public class MainMenu implements Drawable {
             // TODO: Settings button is clicked
             if (this.mediaPlayer.isMute()) {
                 this.mediaPlayer.setMute(false);
-                gc.drawImage(settingsButtonImage, SETTINGS_BUTTON_X, SETTINGS_BUTTON_Y);
             } else{
                 this.mediaPlayer.setMute(true);
-                gc.drawImage(muteButtonImage, SETTINGS_BUTTON_X, SETTINGS_BUTTON_Y);
             }
         }
     }
