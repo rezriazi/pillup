@@ -4,6 +4,7 @@ import gamejam.model.interfaces.Drawable;
 import gamejam.model.utils.Background;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.media.MediaPlayer;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -30,10 +31,11 @@ public class MainMenu implements Drawable {
     private Image playButtonImage;
     private Runnable playRunnable;
     private Runnable settingsRunnable;
+    private MediaPlayer mediaPlayer;
 
     private Image settingsButtonImage;
 
-    public MainMenu(Runnable playRunnable) throws FileNotFoundException {
+    public MainMenu(Runnable playRunnable, MediaPlayer mediaPlayer) throws FileNotFoundException {
         this.playRunnable = playRunnable;
         this.background = new Background(new FileInputStream(MAIN_MENU_BACKGROUND_PATH));
         this.playButtonImage =
@@ -44,6 +46,7 @@ public class MainMenu implements Drawable {
                 new Image(new FileInputStream(SETTINGS_BUTTON_PATH),
                         50, 50,
                         false, false);
+        this.mediaPlayer = mediaPlayer;
     }
 
     @Override
@@ -67,11 +70,21 @@ public class MainMenu implements Drawable {
         gc.drawImage(settingsButtonImage, SETTINGS_BUTTON_X, SETTINGS_BUTTON_Y);
     }
 
-    public void onClick(double mouseX,double mouseY){
+    private <T> void drawMuteButton(GraphicsContext gc){
+        gc.drawImage(settingsButtonImage, SETTINGS_BUTTON_X, SETTINGS_BUTTON_Y);
+    }
+
+
+    public void onClick(double mouseX,double mouseY, GraphicsContext gc){
         if (isOnPlayButton(mouseX, mouseY)) {
             playRunnable.run();
         } else if (isOnSettingsButton(mouseX, mouseY)) {
             // TODO: Settings button is clicked
+            if (this.mediaPlayer.isMute()) {
+                this.mediaPlayer.setMute(false);
+            } else{
+                this.mediaPlayer.setMute(true);
+            }
         }
     }
 
