@@ -1,12 +1,10 @@
 package gamejam.ui;
 
-import com.sun.org.apache.regexp.internal.RE;
 import gamejam.model.interfaces.Drawable;
 import gamejam.model.objects.Player;
 import gamejam.model.utils.Background;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 import java.io.FileInputStream;
@@ -83,7 +81,7 @@ public class GameOver implements Drawable {
         GraphicsContext gc = (GraphicsContext) obj[0];
         gc.setFont(new Font("", 30));
         gc.fillText("Score: " + (player.getScore()/55),SCORE_BUTTON_X-100,SCORE_BUTTON_Y);
-        gc.fillText("High Score: " + (player.updateHighScore()/55),SCORE_BUTTON_X + 70,SCORE_BUTTON_Y);
+        gc.fillText("High Score: " + (player.updateHighScore()/55),SCORE_BUTTON_X + 30,SCORE_BUTTON_Y);
     }
 
 
