@@ -1,1 +1,1 @@
-# BCGameJam2020
+# PILL UP - Beat your friends' highscore!
